@@ -1,0 +1,52 @@
+<section class='container section-space'>
+  <div class='collection-heading'>
+    <div>
+      <p class='eyebrow'>{{ 'general.collections' | t }}</p>
+      <h1 class='display'>{{ collection.title | escape }}</h1>
+      <div class='rte'>{{ collection.description }}</div>
+    </div>
+    {% if collection.image %}{% render 'image', image: collection.image, eager: true %}{% endif %}
+  </div>
+  {% render 'facets', results: collection, action: collection.url -%}
+  {%- paginate collection.products by section.settings.page_size %}
+    <p class='eyebrow'>
+      {{ collection.products_count }}
+      {{ 'general.results' | t }}
+    </p>
+    <div class='product-grid' style='--columns:{{ section.settings.columns }}'>
+      {% for product in collection.products -%}
+        {%- assign eager = false -%}
+        {%- if forloop.index <= 2 %}{% assign eager = true %}{% endif -%}
+        {%- render 'product-card', product: product, eager: eager -%}
+      {%- else %}
+        <p>{{ 'general.no_results' | t }}</p>
+      {% endfor %}
+    </div>
+    {% render 'pagination', paginate: paginate -%}
+  {%- endpaginate %}
+</section>
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "page_size",
+      "label": "Products per page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Desktop columns",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    }
+  ]
+}
+{% endschema %}

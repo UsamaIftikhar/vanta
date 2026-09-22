@@ -1,0 +1,26 @@
+<span class='price'>
+  {% if product.price_varies and card -%}
+    <span>
+      {{- product.price_min | money_with_currency }} –
+      {{ product.price_max | money_with_currency -}}
+    </span>
+  {%- else %}
+    {%- if variant.compare_at_price > variant.price -%}
+      <s
+        ><span class='visually-hidden'>{{ 'general.regular_price' | t }}</span>
+        {{- variant.compare_at_price | money_with_currency -}}
+      </s>
+    {% endif -%}
+    <span>{{ variant.price | money_with_currency }}</span>
+  {%- endif %}
+  {%- if variant.unit_price_measurement -%}
+    <small class='unit-price'
+      ><span class='visually-hidden'>{{ 'general.unit_price' | t }}</span>
+      {{- variant.unit_price | money }} /
+      {% if variant.unit_price_measurement.reference_value != 1 -%}
+        {{- variant.unit_price_measurement.reference_value -}}
+      {%- endif -%}
+      {{- variant.unit_price_measurement.reference_unit -}}
+    </small>
+  {%- endif -%}
+</span>

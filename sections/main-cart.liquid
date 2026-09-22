@@ -1,0 +1,10 @@
+<section class='container section-space'>
+  <h1 class='display'>{{ 'general.cart' | t }}</h1>
+  <cart-page data-section='{{ section.id }}'>{% render 'cart-content' %}</cart-page>
+</section>
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

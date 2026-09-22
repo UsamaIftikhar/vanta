@@ -1,0 +1,61 @@
+<media-gallery
+  class='media-gallery layout-{{ section.settings.media_layout }}'
+  data-featured='{{ selected.featured_media.id }}'
+>
+  <div class='media-track'>
+    {% for media in product.media %}
+      <div
+        class='media-item'
+        id='Media-{{ section.id }}-{{ media.id }}'
+        data-media-id='{{ media.id }}'
+      >
+        {% case media.media_type -%}
+          {%- when 'image' -%}
+            <a
+              href='{{ media | image_url: width: 2400 }}'
+              data-zoom
+              aria-label='{{ 'general.zoom' | t }} — {{ media.alt | default: product.title | escape }}'
+            >
+              {%- assign eager = forloop.first -%}
+              {%- render 'image', image: media, eager: eager, alt: product.title -%}
+            </a>
+          {%- when 'video' -%}
+            {{-
+              media
+              | video_tag: controls: true, preload: 'none', image_size: '1000x', loop: false
+            -}}
+          {%- when 'external_video' -%}
+            {{- media | external_video_tag: loading: 'lazy' -}}
+          {%- when 'model' -%}
+            {{-
+              media
+              | model_viewer_tag:
+                reveal: 'interaction',
+                toggleable: true,
+                image_size: '1000x',
+                interaction-prompt: 'auto'
+            -}}
+        {%- endcase %}
+      </div>
+    {% else -%}
+      {{- 'product-1' | placeholder_svg_tag: 'placeholder' -}}
+    {%- endfor %}
+  </div>
+  {% if product.media.size > 1 %}
+    <nav class='media-thumbnails' aria-label='{{ 'general.view_product' | t }}'>
+      {% for media in product.media -%}
+        <a
+          href='#Media-{{ section.id }}-{{ media.id }}'
+          data-media-target='{{ media.id }}'
+          aria-label='{{ media.alt | default: product.title | escape }} {{ forloop.index }}'
+        >
+          {{- media.preview_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' -}}
+        </a>
+      {%- endfor %}
+    </nav>
+  {% endif %}
+  <dialog class='zoom-dialog' aria-label='{{ 'general.zoom' | t }}'>
+    <button data-close-dialog type='button'>{{ 'general.close' | t }} ×</button
+    ><img data-zoom-image alt='' width='1600' height='1600'>
+  </dialog>
+</media-gallery>

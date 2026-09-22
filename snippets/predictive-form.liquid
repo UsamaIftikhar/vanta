@@ -1,0 +1,24 @@
+<predictive-search
+  data-results-label='{{ 'general.results' | t | escape }}'
+  data-url='{{ routes.predictive_search_url }}'
+>
+  <form action='{{ routes.search_url }}' method='get' role='search'>
+    <label for='Search-{{ id }}' class='visually-hidden'>{{ 'general.search' | t }}</label>
+    <div class='search-field'>
+      <input
+        id='Search-{{ id }}'
+        type='search'
+        name='q'
+        autocomplete='off'
+        aria-controls='Predictive-{{ id }}'
+        aria-expanded='false'
+        role='combobox'
+        aria-autocomplete='list'
+
+      ><button>{{ 'general.search' | t }} ↗</button>
+    </div>
+    <input type='hidden' name='options[prefix]' value='last'>
+  </form>
+  <div id='Predictive-{{ id }}' data-results hidden></div>
+  <p class='visually-hidden' role='status' data-search-status></p>
+</predictive-search>

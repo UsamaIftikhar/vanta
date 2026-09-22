@@ -1,0 +1,27 @@
+{% if image != blank %}
+  {% liquid
+    assign image_loading = 'lazy'
+    assign priority = 'auto'
+    if eager
+      assign image_loading = 'eager'
+      assign priority = 'high'
+    endif
+    assign image_alt = image.alt | default: alt
+    assign image_sizes = sizes | default: '(min-width: 990px) 50vw, 100vw'
+  %}
+  {{
+    image
+    | image_url: width: 2400
+    | image_tag:
+      widths: '320,480,640,800,1000,1200,1600,2000,2400',
+      sizes: image_sizes,
+      loading: image_loading,
+      fetchpriority: priority,
+      class: class,
+      alt: image_alt
+  }}
+{% elsif demo != blank and settings.demo_images -%}
+  {%- render 'demo-image', kind: demo, eager: eager, class: class, sizes: sizes -%}
+{%- else -%}
+  {{- 'product-1' | placeholder_svg_tag: 'placeholder' -}}
+{%- endif %}

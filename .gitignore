@@ -1,0 +1,9 @@
+node_modules/
+.shopify/
+.env*
+*.zip
+test-results/
+playwright-report/
+.lighthouseci/
+test-results-cross-browser/
+test-results-variant-recheck/

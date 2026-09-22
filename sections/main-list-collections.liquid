@@ -1,0 +1,22 @@
+<section class='container section-space'>
+  <h1 class='display'>{{ 'general.collections' | t }}</h1>
+  {% paginate collections by 12 %}
+    <div class='collection-grid'>
+      {% for collection in collections %}
+        <article>
+          <a href='{{ collection.url }}'>
+            {%- render 'image', image: collection.featured_image %}
+            <h2>{{ collection.title | escape }}</h2>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+    {% render 'pagination', paginate: paginate -%}
+  {%- endpaginate %}
+</section>
+{% schema %}
+{
+  "name": "Collection list",
+  "settings": []
+}
+{% endschema %}

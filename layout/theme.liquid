@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang='{{ request.locale.iso_code }}'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <title>
+      {{ page_title | escape }}
+      {% if current_tags %} — {{ current_tags | join: ', ' | escape }}{% endif %}
+      {% if current_page != 1 %}
+        — {{ 'general.page' | t }}
+        {{ current_page -}}
+      {%- endif %}
+      {% unless page_title contains shop.name %} — {{ shop.name | escape }}{% endunless %}
+    </title>
+    <link rel='canonical' href='{{ canonical_url }}'>
+    {% assign meta_description = page_description
+      | default: shop.description
+      | default: shop.name
+    %}
+    <meta name='description' content='{{ meta_description | escape }}'>
+    {% if settings.favicon -%}
+      <link rel='icon' href='{{ settings.favicon | image_url: width: 32 }}'>
+    {%- else -%}
+      <link rel='icon' type='image/svg+xml' href='{{ 'favicon.svg' | asset_url }}'>
+    {%- endif %}
+    {% unless settings.display_font.system? -%}
+      {{
+        settings.display_font
+        | font_url
+        | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous'
+      }}
+    {%- endunless %}
+    {% render 'meta-tags' %}
+    {% render 'design-tokens' %}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+    <script type='module' src='{{ 'theme.js' | asset_url }}'></script>
+  </head>
+  <body
+    class='cards-{{ settings.card_style }}'
+    data-reveal='{{ settings.reveal }}'
+    data-magnetic='{{ settings.magnetic }}'
+    data-cursor='{{ settings.custom_cursor }}'
+    data-quality='{{ settings.quality }}'
+    data-enable-3d='{{ settings.enable_3d }}'
+    data-cart-drawer='{{ settings.cart_drawer }}'
+    data-error='{{ 'general.error' | t | escape }}'
+    data-added='{{ 'general.added' | t | escape }}'
+  >
+    <a class='skip-link' href='#MainContent'>{{ 'general.skip' | t }}</a>
+    {% sections 'header-group' %}
+    <main id='MainContent' tabindex='-1'>{{ content_for_layout }}</main>
+    {% sections 'footer-group' %}
+    {% if settings.cart_drawer %}{% section 'cart-drawer' %}{% endif %}
+    <div class='visually-hidden' role='status' id='StoreStatus'></div>
+  </body>
+</html>

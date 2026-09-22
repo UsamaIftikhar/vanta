@@ -1,0 +1,37 @@
+<section class='container section-space'>
+  <p class='eyebrow'>{{ 'general.blog' | t }}</p>
+  <h1 class='display'>{{ blog.title | escape }}</h1>
+  {% if blog.all_tags.size > 0 %}
+    <ul class='inline-list'>
+      <li>
+        <a href='{{ blog.url }}'>{{ 'general.all' | t }}</a>
+      </li>
+      {% for tag in blog.all_tags %}
+        <li>{{ tag | link_to_tag: tag }}</li>
+      {% endfor %}
+    </ul>
+  {% endif -%}
+  {%- paginate blog.articles by 12 %}
+    <div class='editorial-grid'>
+      {% for article in blog.articles %}
+        <article>
+          <a href='{{ article.url }}'>
+            {%- if article.image %}{% render 'image', image: article.image %}{% endif %}
+            <p class='eyebrow'>{{ article.published_at | time_tag: format: 'date' }}</p>
+            <h2>{{ article.title | escape }}</h2>
+          </a>
+          <div class='rte'>{{ article.excerpt_or_content | strip_html | truncatewords: 30 }}</div>
+        </article>
+      {% else %}
+        <p>{{ 'general.no_results' | t }}</p>
+      {% endfor %}
+    </div>
+    {% render 'pagination', paginate: paginate -%}
+  {%- endpaginate %}
+</section>
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,103 @@
+<section
+  class='marketing-section'
+  style='--section-bg:{{ section.settings.background }};--section-fg:{{ section.settings.foreground }};--space:{{ section.settings.spacing }}px;--text-align:{{ section.settings.alignment }}'
+>
+  <div class='container'>
+    <div class='newsletter-layout'>
+      <div class='section-heading' data-animate>
+        <div>
+          <p class='eyebrow'>{{ section.settings.eyebrow | escape }}</p>
+          <h2>{{ section.settings.heading | escape }}</h2>
+        </div>
+        <div class='rte'>{{ section.settings.text }}</div>
+      </div>
+      {% form 'customer', class: 'newsletter-form' %}
+        <input type='hidden' name='contact[tags]' value='newsletter'
+        ><label for='Email-{{ section.id }}'>{{ 'general.email' | t }}</label>
+        <div class='search-field'>
+          <input
+            id='Email-{{ section.id }}'
+            type='email'
+            name='contact[email]'
+            autocomplete='email'
+            required
+            aria-describedby='NewsletterStatus-{{ section.id }}'
+
+          ><button type='submit'>{{ 'general.subscribe' | t }} ↗</button>
+        </div>
+        <div id='NewsletterStatus-{{ section.id }}' role='status'>
+          {{ form.errors | default_errors -}}
+          {%- if form.posted_successfully? %}{{ 'general.success' | t }}{% endif %}
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "VANTA Athletics"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built for motion."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Engineered for movement. Designed for everywhere.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#101110"
+    },
+    {
+      "type": "color",
+      "id": "foreground",
+      "label": "Text color",
+      "default": "#f3f2ed"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Vertical spacing",
+      "min": 24,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

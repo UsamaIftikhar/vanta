@@ -1,0 +1,253 @@
+<section
+  class='immersive-hero'
+  style='--section-bg:{{ section.settings.background }};--section-fg:{{ section.settings.foreground }};--hero-height:{{ section.settings.height }}svh'
+>
+  <div class='hero-grid container'>
+    <div class='hero-copy'>
+      <p class='eyebrow'>{{ section.settings.eyebrow | escape }}</p>
+      {% if section.settings.primary %}
+        <h1 class='hero-title'>{{ section.settings.heading | escape | newline_to_br }}</h1>
+      {% else %}
+        <h2 class='hero-title'>{{ section.settings.heading | escape | newline_to_br }}</h2>
+      {% endif %}
+      <div class='hero-description rte'>{{ section.settings.text }}</div>
+      {% if section.settings.button_link -%}
+        <a class='button' data-magnetic href='{{ section.settings.button_link }}'>
+          {{- section.settings.button_label | escape }} ↗</a
+        >
+      {%- endif %}
+    </div>
+    <div class='hero-product'>
+      {% assign eager = false -%}
+      {%- if section.index == 1 %}{% assign eager = true %}{% endif -%}
+      {%- render 'product-scene', eager: eager %}
+    </div>
+    <div class='hero-footer'>
+      <span>{{ section.settings.caption | escape }}</span><span aria-hidden='true'>↓</span
+      ><span>{{ section.settings.detail | escape }}</span>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Immersive 3D hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "VANTA Athletics / Motion studies 001"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "BUILT\nFOR\nMOTION."
+    },
+    {
+      "type": "checkbox",
+      "id": "primary",
+      "label": "Use as page heading",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Description",
+      "default": "<p>Less between you and your next move.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Explore the collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Bottom caption",
+      "default": "Form follows feeling."
+    },
+    {
+      "type": "text",
+      "id": "detail",
+      "label": "Bottom detail",
+      "default": "Designed for everywhere."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#101110"
+    },
+    {
+      "type": "color",
+      "id": "foreground",
+      "label": "Text color",
+      "default": "#f3f2ed"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Minimum height",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 90
+    },
+    {
+      "type": "url",
+      "id": "model",
+      "label": "GLB model URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Poster / fallback image"
+    },
+    {
+      "type": "range",
+      "id": "scale",
+      "label": "Model scale",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "rotation",
+      "label": "Starting rotation",
+      "min": -180,
+      "max": 180,
+      "step": 5,
+      "unit": "deg",
+      "default": -20
+    },
+    {
+      "type": "range",
+      "id": "camera",
+      "label": "Camera distance",
+      "min": 2,
+      "max": 8,
+      "step": 0.5,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "camera_angle",
+      "label": "Camera elevation",
+      "min": -40,
+      "max": 60,
+      "step": 5,
+      "unit": "deg",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "position_x",
+      "label": "Horizontal position",
+      "min": -100,
+      "max": 100,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "position_y",
+      "label": "Vertical position",
+      "min": -100,
+      "max": 100,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "Auto rotation",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "rotation_speed",
+      "label": "Rotation speed",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "pointer",
+      "label": "Pointer interaction",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "scroll",
+      "label": "Scroll rotation",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "lighting",
+      "label": "Lighting",
+      "options": [
+        {
+          "value": "studio",
+          "label": "Studio"
+        },
+        {
+          "value": "edge",
+          "label": "Edge light"
+        }
+      ],
+      "default": "studio"
+    },
+    {
+      "type": "select",
+      "id": "mobile",
+      "label": "Mobile behavior",
+      "options": [
+        {
+          "value": "poster",
+          "label": "Poster with 3D button"
+        },
+        {
+          "value": "interactive",
+          "label": "Load interactive 3D"
+        }
+      ],
+      "default": "poster"
+    },
+    {
+      "type": "select",
+      "id": "reduced",
+      "label": "Reduced motion",
+      "options": [
+        {
+          "value": "poster",
+          "label": "Poster with 3D button"
+        },
+        {
+          "value": "static",
+          "label": "Static interactive model"
+        }
+      ],
+      "default": "poster"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Immersive 3D hero"
+    }
+  ]
+}
+{% endschema %}

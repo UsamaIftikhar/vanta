@@ -1,0 +1,187 @@
+<section
+  class='marketing-section'
+  style='--section-bg:{{ section.settings.background }};--section-fg:{{ section.settings.foreground }};--space:{{ section.settings.spacing }}px;--text-align:{{ section.settings.alignment }}'
+>
+  <div class='container'>
+    <div class='section-heading' data-animate>
+      <div>
+        <p class='eyebrow'>{{ section.settings.eyebrow | escape }}</p>
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+      <div class='rte'>{{ section.settings.text }}</div>
+    </div>
+    <div class='hotspot-layout'>
+      <div class='hotspot-media'>
+        {% render 'image', image: section.settings.image, demo: 'editorial' -%}
+        {%- for block in section.blocks -%}
+          <a
+            class='hotspot-dot'
+            href='#Hotspot-{{ section.id }}-{{ block.id }}'
+            style='left:{{ block.settings.x }}%;top:{{ block.settings.y }}%'
+            aria-label='{{ block.settings.heading | escape }}'
+          >
+            {{- forloop.index -}}
+          </a>
+        {%- endfor %}
+      </div>
+      <div>
+        {% for block in section.blocks %}
+          <details
+            id='Hotspot-{{ section.id }}-{{ block.id }}'
+            data-hotspot
+            data-rotation='{{ block.settings.rotation }}'
+            data-camera='{{ block.settings.camera }}'
+            {{ block.shopify_attributes }}
+          >
+            <summary>
+              <span class='eyebrow'>0{{ forloop.index }}</span>
+              {{ block.settings.heading | escape }}
+            </summary>
+            <div class='rte'>{{ block.settings.text }}</div>
+            {% if block.settings.product -%}
+              <a href='{{ block.settings.product.url }}'>
+                {{- block.settings.product.title | escape }} ↗</a
+              >
+            {%- endif %}
+          </details>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Editorial lookbook",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "VANTA Athletics"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built for motion."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Engineered for movement. Designed for everywhere.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#101110"
+    },
+    {
+      "type": "color",
+      "id": "foreground",
+      "label": "Text color",
+      "default": "#f3f2ed"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Vertical spacing",
+      "min": 24,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Hotspot",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Label",
+          "default": "Material matters."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Explain the detail that makes your product different.</p>"
+        },
+        {
+          "type": "range",
+          "id": "x",
+          "label": "Horizontal position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "y",
+          "label": "Vertical position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "rotation",
+          "label": "Model rotation",
+          "min": -180,
+          "max": 180,
+          "step": 5,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "camera",
+          "label": "Camera distance",
+          "min": 2,
+          "max": 8,
+          "step": 0.5,
+          "default": 3
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Linked product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial lookbook"
+    }
+  ]
+}
+{% endschema %}

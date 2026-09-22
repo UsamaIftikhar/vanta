@@ -1,0 +1,289 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "VANTA",
+    "theme_version": "0.1.0",
+    "theme_author": "VANTA",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background",
+        "default": "#101110"
+      },
+      {
+        "type": "color",
+        "id": "foreground",
+        "label": "Text",
+        "default": "#f3f2ed"
+      },
+      {
+        "type": "color",
+        "id": "accent",
+        "label": "Accent",
+        "default": "#d5fa45"
+      },
+      {
+        "type": "color",
+        "id": "secondary",
+        "label": "Surface",
+        "default": "#20221f"
+      },
+      {
+        "type": "color",
+        "id": "muted",
+        "label": "Secondary text",
+        "default": "#b9bcb3"
+      },
+      {
+        "type": "color",
+        "id": "border",
+        "label": "Borders",
+        "default": "#45483f"
+      },
+      {
+        "type": "color",
+        "id": "accent_foreground",
+        "label": "Text on accent",
+        "default": "#101110"
+      },
+      {
+        "type": "color",
+        "id": "surface_foreground",
+        "label": "Text on surface",
+        "default": "#f3f2ed"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "display_font",
+        "label": "Display",
+        "default": "assistant_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Headings",
+        "default": "assistant_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Body",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "button_font",
+        "label": "Buttons",
+        "default": "assistant_n7"
+      },
+      {
+        "type": "range",
+        "id": "type_scale",
+        "label": "Type scale",
+        "min": 80,
+        "max": 120,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 1000,
+        "max": 2000,
+        "step": 100,
+        "unit": "px",
+        "default": 1600
+      },
+      {
+        "type": "range",
+        "id": "section_spacing",
+        "label": "Section spacing",
+        "min": 32,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "default": 96
+      },
+      {
+        "type": "range",
+        "id": "radius",
+        "label": "Corner radius",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "card_style",
+        "label": "Product cards",
+        "options": [
+          {
+            "value": "minimal",
+            "label": "Minimal"
+          },
+          {
+            "value": "editorial",
+            "label": "Editorial"
+          },
+          {
+            "value": "framed",
+            "label": "Framed"
+          },
+          {
+            "value": "full-bleed",
+            "label": "Full-Bleed"
+          }
+        ],
+        "default": "minimal"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_drawer",
+        "label": "Enable cart drawer",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Motion and 3D",
+    "settings": [
+      {
+        "type": "select",
+        "id": "reveal",
+        "label": "Content reveals",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "fade",
+            "label": "Fade"
+          },
+          {
+            "value": "fade-up",
+            "label": "Fade-Up"
+          },
+          {
+            "value": "clip",
+            "label": "Clip"
+          },
+          {
+            "value": "scale-subtle",
+            "label": "Scale-Subtle"
+          },
+          {
+            "value": "stagger",
+            "label": "Stagger"
+          }
+        ],
+        "default": "fade-up"
+      },
+      {
+        "type": "range",
+        "id": "motion_duration",
+        "label": "Reveal duration",
+        "min": 200,
+        "max": 1000,
+        "step": 100,
+        "unit": "ms",
+        "default": 600
+      },
+      {
+        "type": "checkbox",
+        "id": "magnetic",
+        "label": "Magnetic buttons",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "custom_cursor",
+        "label": "Pointer halo",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_3d",
+        "label": "Enable 3D experiences",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "quality",
+        "label": "3D quality",
+        "options": [
+          {
+            "value": "high",
+            "label": "High"
+          },
+          {
+            "value": "balanced",
+            "label": "Balanced"
+          },
+          {
+            "value": "poster",
+            "label": "Poster"
+          }
+        ],
+        "default": "balanced"
+      }
+    ]
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      },
+      {
+        "type": "image_picker",
+        "id": "social_image",
+        "label": "Social sharing image"
+      },
+      {
+        "type": "url",
+        "id": "instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "text",
+        "id": "brand_label",
+        "label": "Text logo",
+        "default": "VANTA"
+      },
+      {
+        "type": "checkbox",
+        "id": "demo_images",
+        "label": "Show fictional demo images in empty marketing sections",
+        "default": true
+      }
+    ]
+  }
+]

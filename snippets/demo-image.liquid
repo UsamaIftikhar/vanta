@@ -1,0 +1,33 @@
+{% liquid
+  assign image_loading = 'lazy'
+  assign priority = 'auto'
+  if eager
+    assign image_loading = 'eager'
+    assign priority = 'high'
+  endif
+%}
+{% if kind == 'editorial' %}
+  <img
+    src='{{ 'vanta-editorial.jpg' | asset_url }}'
+    srcset='{{ 'vanta-editorial-small.jpg' | asset_url }} 480w, {{ 'vanta-editorial.jpg' | asset_url }} 1024w'
+    sizes='{{ sizes | default: '(min-width: 990px) 50vw, 100vw' }}'
+    width='1024'
+    height='1536'
+    alt='{{ 'general.demo_alt' | t }}'
+    loading='{{ image_loading }}'
+    fetchpriority='{{ priority }}'
+    class='{{ class }}'
+  >
+{% else %}
+  <img
+    src='{{ 'vanta-campaign.jpg' | asset_url }}'
+    srcset='{{ 'vanta-campaign-small.jpg' | asset_url }} 720w, {{ 'vanta-campaign.jpg' | asset_url }} 1536w'
+    sizes='{{ sizes | default: '(min-width: 990px) 50vw, 100vw' }}'
+    width='1536'
+    height='1024'
+    alt='{{ 'general.demo_alt' | t }}'
+    loading='{{ image_loading }}'
+    fetchpriority='{{ priority }}'
+    class='{{ class }}'
+  >
+{% endif %}

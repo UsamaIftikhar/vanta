@@ -1,0 +1,213 @@
+{
+  "sections": {
+    "hero": {
+      "type": "immersive-hero",
+      "settings": {
+        "button_link": "shopify://collections/all",
+        "button_label": "Explore VANTA"
+      }
+    },
+    "statement": {
+      "type": "brand-statement",
+      "settings": {
+        "eyebrow": "01 / Our philosophy",
+        "heading": "NOT MADE TO STAND STILL.",
+        "text": "<p>Movement is a mindset. We make room for yours.</p>",
+        "background": "#e6e6de",
+        "foreground": "#141611"
+      }
+    },
+    "featured": {
+      "type": "featured-product"
+    },
+    "collections": {
+      "type": "collection-grid",
+      "settings": {
+        "heading": "Find your movement.",
+        "text": "<p>For the everyday. For the unexpected. Find your own rhythm.</p>"
+      },
+      "blocks": {
+        "0": {
+          "type": "collection",
+          "settings": {
+            "heading": "The everyday"
+          }
+        },
+        "1": {
+          "type": "collection",
+          "settings": {
+            "heading": "The next step"
+          }
+        }
+      },
+      "block_order": [
+        "0",
+        "1"
+      ]
+    },
+    "journey": {
+      "type": "horizontal-story",
+      "settings": {
+        "heading": "Every detail. A reason.",
+        "text": "<p>Explore the thinking behind the VANTA concept.</p>"
+      },
+      "blocks": {
+        "0": {
+          "type": "frame",
+          "settings": {
+            "heading": "A lighter approach."
+          }
+        },
+        "1": {
+          "type": "frame",
+          "settings": {
+            "heading": "Built from the ground up."
+          }
+        },
+        "2": {
+          "type": "frame",
+          "settings": {
+            "heading": "Go your own way."
+          }
+        }
+      },
+      "block_order": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    "hotspots": {
+      "type": "product-hotspots",
+      "settings": {
+        "heading": "Form. Function. Feeling.",
+        "text": "<p>A closer look at our fictional X1 concept.</p>"
+      },
+      "blocks": {
+        "0": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "A lighter approach.",
+            "text": "<p>A fictional study in engineered mesh. Built around the feeling of moving freely.</p>",
+            "x": 45,
+            "y": 35
+          }
+        },
+        "1": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "Sculpted for motion.",
+            "text": "<p>A layered silhouette that follows the natural rhythm of your stride.</p>",
+            "x": 60,
+            "y": 62
+          }
+        },
+        "2": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "Grounded in detail.",
+            "text": "<p>A closer look at the textures that make the whole.</p>",
+            "x": 28,
+            "y": 75
+          }
+        }
+      },
+      "block_order": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    "video": {
+      "type": "video",
+      "settings": {
+        "heading": "The world is your track."
+      },
+      "disabled": true
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "settings": {
+        "heading": "Out of the ordinary.",
+        "text": "<p>Motion studies / A different route.</p>"
+      },
+      "blocks": {
+        "detail": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "Everyday, reimagined.",
+            "text": "<p>An original VANTA Athletics campaign concept. Take a different route.</p>",
+            "x": 52,
+            "y": 55
+          }
+        }
+      },
+      "block_order": [
+        "detail"
+      ]
+    },
+    "products": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Your next move.",
+        "text": "<p>Original fictional silhouettes. A study in possibility.</p>"
+      }
+    },
+    "marquee": {
+      "type": "marquee"
+    },
+    "comparison": {
+      "type": "comparison",
+      "settings": {
+        "heading": "Find your fit."
+      },
+      "disabled": true
+    },
+    "manifesto": {
+      "type": "image-text",
+      "settings": {
+        "heading": "Made for the way you move.",
+        "eyebrow": "VANTA / Manifesto",
+        "text": "<p>We believe the best design gets out of your way. Less noise. More intention. Space to move, wherever the day takes you.</p>"
+      }
+    },
+    "press": {
+      "type": "logo-list",
+      "settings": {
+        "heading": "In good company."
+      },
+      "disabled": true
+    },
+    "voices": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "In their own words."
+      },
+      "disabled": true
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Stay in motion.",
+        "text": "<p>New ideas. New releases. A fresh perspective.</p>"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "statement",
+    "featured",
+    "collections",
+    "journey",
+    "hotspots",
+    "video",
+    "lookbook",
+    "products",
+    "marquee",
+    "comparison",
+    "manifesto",
+    "press",
+    "voices",
+    "newsletter"
+  ]
+}

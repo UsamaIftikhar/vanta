@@ -1,0 +1,21 @@
+{% liquid
+  assign body_bold = settings.body_font | font_modify: 'weight', 'bold'
+  assign body_italic = settings.body_font | font_modify: 'style', 'italic'
+  assign body_bold_italic = body_bold | font_modify: 'style', 'italic'
+  assign heading_italic = settings.heading_font | font_modify: 'style', 'italic'
+  assign heading_bold = settings.heading_font | font_modify: 'weight', 'bold'
+  assign heading_bold_italic = heading_bold | font_modify: 'style', 'italic'
+%}
+{% style %}
+  {{ body_bold | font_face: font_display: 'swap' }}
+  {{ body_italic | font_face: font_display: 'swap' }}
+  {{ body_bold_italic | font_face: font_display: 'swap' }}
+  {{ heading_bold | font_face: font_display: 'swap' }}
+  {{ heading_italic | font_face: font_display: 'swap' }}
+  {{ heading_bold_italic | font_face: font_display: 'swap' }}
+  {{ settings.display_font | font_face: font_display: 'swap' }}
+  {{ settings.heading_font | font_face: font_display: 'swap' }}
+  {{ settings.body_font | font_face: font_display: 'swap' }}
+  {{ settings.button_font | font_face: font_display: 'swap' }}
+  :root { --background:{{ settings.background }}; --foreground:{{ settings.foreground }}; --accent:{{ settings.accent }}; --accent-foreground:{{ settings.accent_foreground }}; --surface-foreground:{{ settings.surface_foreground }}; --surface:{{ settings.secondary }}; --muted:{{ settings.muted }}; --border:{{ settings.border }}; --display-font:{{ settings.display_font.family }},{{ settings.display_font.fallback_families }}; --heading-font:{{ settings.heading_font.family }},{{ settings.heading_font.fallback_families }}; --body-font:{{ settings.body_font.family }},{{ settings.body_font.fallback_families }}; --button-font:{{ settings.button_font.family }},{{ settings.button_font.fallback_families }}; --type-scale:{{ settings.type_scale | divided_by: 100.0 }}; --page-width:{{ settings.page_width }}px; --section-space:{{ settings.section_spacing }}px; --radius:{{ settings.radius }}px; --duration-reveal:{{ settings.motion_duration }}ms; }
+{% endstyle %}

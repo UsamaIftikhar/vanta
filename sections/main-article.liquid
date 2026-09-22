@@ -1,0 +1,77 @@
+<article class='container section-space'>
+  <header class='article-content'>
+    <p class='eyebrow'>
+      <a href='{{ blog.url }}'>{{ blog.title | escape }}</a> /
+      {{ article.published_at | time_tag: format: 'date' }}
+    </p>
+    <h1>{{ article.title | escape }}</h1>
+    {% if section.settings.author %}
+      <p>{{ article.author | escape }}</p>
+    {% endif %}
+  </header>
+  {% if article.image -%}
+    {%- render 'image', image: article.image, eager: true, class: 'article-hero', sizes: '100vw' -%}
+  {%- endif %}
+  <div class='article-content'>
+    <div class='rte'>{{ article.content }}</div>
+    <a
+      class='text-link'
+      href='mailto:?subject={{ article.title | url_encode }}&body={{ canonical_url | url_encode }}'
+    >
+      {{- 'general.share' | t }} ↗</a
+    >
+    {%- if blog.comments_enabled? %}
+      <h2>{{ 'general.comments' | t }}</h2>
+      {% paginate article.comments by 20 -%}
+        {%- for comment in article.comments %}
+          <article>
+            <h3>{{ comment.author | escape }}</h3>
+            <div class='rte'>{{ comment.content }}</div>
+          </article>
+        {% endfor -%}
+        {%- render 'pagination', paginate: paginate -%}
+      {%- endpaginate %}
+      {% form 'new_comment', article, class: 'contact-form' %}
+        {{ form.errors | default_errors -}}
+        {%- if form.posted_successfully? %}
+          <p role='status'>{{ 'general.contact_success' | t }}</p>
+        {% endif -%}
+        <label>
+          {{- 'general.name' | t -}}
+          <input
+            name='comment[author]'
+            autocomplete='name'
+            value='{{ form.author | escape }}'
+            required></label
+        ><label>
+          {{- 'general.email' | t -}}
+          <input
+            name='comment[email]'
+            type='email'
+            autocomplete='email'
+            value='{{ form.email | escape }}'
+            required></label
+        ><label>
+          {{- 'general.message' | t -}}
+          <textarea name='comment[body]' required>{{ form.body | escape }}</textarea></label
+        ><button class='button'>{{ 'general.post_comment' | t }}</button>
+      {% endform %}
+    {% endif %}
+  </div>
+</article>
+<script type='application/ld+json'>
+  {{ article | structured_data }}
+</script>
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "author",
+      "label": "Show author",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

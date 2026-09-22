@@ -1,0 +1,30 @@
+{
+  "name": "vanta-theme",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "shopify theme check --fail-level warning",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test",
+    "dev": "shopify theme dev",
+    "package": "npm run build && npm run check && shopify theme package",
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "test:cross-browser": "playwright test --config playwright.cross-browser.config.mjs tests/browser/storefront.spec.mjs tests/browser/forms-filters.spec.mjs",
+    "format": "prettier --write \"assets/*.{js,css}\" \"{layout,sections,snippets,templates}/*.liquid\""
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
+    "@shopify/cli": "4.8.0",
+    "@shopify/prettier-plugin-liquid": "1.11.0",
+    "chrome-launcher": "1.2.1",
+    "esbuild": "0.28.2",
+    "lighthouse": "13.5.0",
+    "prettier": "3.9.8"
+  },
+  "dependencies": {
+    "three": "0.186.0"
+  }
+}

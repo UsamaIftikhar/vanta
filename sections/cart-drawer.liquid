@@ -1,0 +1,16 @@
+<cart-drawer data-section='{{ section.id }}'>
+  <dialog id='CartDrawer' aria-labelledby='CartTitle'>
+    <div class='drawer-heading'>
+      <h2 id='CartTitle'>{{ 'general.cart' | t }}</h2>
+      <button type='button' data-close-dialog>{{ 'general.close' | t }} ×</button>
+    </div>
+    <div data-cart-content>{% render 'cart-content', drawer: true %}</div>
+    <a href='{{ routes.cart_url }}'>{{ 'general.view_cart' | t }} ↗</a>
+  </dialog>
+</cart-drawer>
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": []
+}
+{% endschema %}

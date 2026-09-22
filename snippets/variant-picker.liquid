@@ -1,0 +1,32 @@
+{% unless product.has_only_default_variant %}
+  <div class='variant-picker'>
+    {% for option in product.options_with_values %}
+      <fieldset>
+        <legend>
+          {{ option.name | escape }}:
+          <span class='muted'>{{ option.selected_value | escape }}</span>
+        </legend>
+        <div class='option-values'>
+          {% for value in option.values %}
+            {% capture option_ids %}{% for other_option in product.options_with_values %}{% if other_option.position == option.position %}{{ value.id }}{% else %}{% for other_value in other_option.values %}{% if other_value.selected %}{{ other_value.id }}{% endif %}{% endfor %}{% endif %}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture -%}
+            <a
+              class='option-value {% if value.selected %}selected{% endif %} {% unless value.available %}unavailable{% endunless %}'
+              href='{{ value.product_url | default: product.url }}?option_values={{ option_ids | strip }}'
+              data-option-link
+              data-option-id='{{ value.id }}'
+              {% if value.selected %}
+                aria-current='true'
+              {% endif %}
+            >
+              {%- render 'swatch', swatch: value.swatch -%}
+              {{- value | escape -}}
+              {%- unless value.available -%}
+                <span class='visually-hidden'> — {{ 'general.unavailable' | t }}</span>
+              {%- endunless -%}
+            </a>
+          {%- endfor %}
+        </div>
+      </fieldset>
+    {% endfor %}
+  </div>
+{% endunless %}

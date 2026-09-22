@@ -1,0 +1,42 @@
+<section class='container section-space'>
+  <h1 class='display'>{{ page.title | escape }}</h1>
+  <div class='rte'>{{ page.content }}</div>
+  {% form 'contact', class: 'contact-form' %}
+    <div role='alert'>{{ form.errors | default_errors }}</div>
+    {% if form.posted_successfully? %}
+      <p role='status'>{{ 'general.contact_success' | t }}</p>
+    {% endif -%}
+    <label for='ContactName-{{ section.id }}'>{{ 'general.name' | t }}</label
+    ><input
+      id='ContactName-{{ section.id }}'
+      name='contact[name]'
+      autocomplete='name'
+      value='{{ form.name | default: customer.name | escape }}'
+
+    ><label for='ContactEmail-{{ section.id }}'>{{ 'general.email' | t }}</label
+    ><input
+      id='ContactEmail-{{ section.id }}'
+      name='contact[email]'
+      type='email'
+      autocomplete='email'
+      required
+      value='{{ form.email | default: customer.email | escape }}'
+      {% if form.errors contains 'email' %}
+        aria-invalid='true'
+      {% endif %}
+
+    ><label for='ContactMessage-{{ section.id }}'>{{ 'general.message' | t }}</label
+    >><textarea
+      id='ContactMessage-{{ section.id }}'
+      name='contact[body]'
+      required
+    >{{ form.body | escape }}</textarea
+    ><button class='button' type='submit'>{{ 'general.send' | t }} ↗</button>
+  {% endform %}
+</section>
+{% schema %}
+{
+  "name": "Contact",
+  "settings": []
+}
+{% endschema %}

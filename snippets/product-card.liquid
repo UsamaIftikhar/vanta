@@ -1,0 +1,74 @@
+<article class='product-card'>
+  <a class='card-media' href='{{ product.url }}' aria-label='{{ product.title | escape }}'>
+    {%- render 'image',
+      image: product.featured_media.preview_image,
+      alt: product.title,
+      eager: eager,
+      sizes: '(min-width: 990px) 25vw, 50vw'
+    -%}
+    {%- if product.media[1] -%}
+      {%- render 'image',
+        image: product.media[1].preview_image,
+        class: 'card-secondary',
+        sizes: '(min-width: 990px) 25vw, 50vw'
+      -%}
+    {%- endif -%}
+    <span class='card-arrow' aria-hidden='true'>↗</span></a
+  >
+  <div class='card-info'>
+    <div>
+      {% if request.page_type == 'collection' or request.page_type == 'search' %}
+        <h2>
+          <a href='{{ product.url }}'>{{ product.title | escape }}</a>
+        </h2>
+      {% else %}
+        <h3>
+          <a href='{{ product.url }}'>{{ product.title | escape }}</a>
+        </h3>
+      {% endif -%}
+      {%- render 'price',
+        product: product,
+        variant: product.selected_or_first_available_variant,
+        card: true
+      %}
+    </div>
+    {% unless product.available -%}
+      <span class='badge'>{{ 'general.sold_out' | t }}</span>
+    {%- else -%}
+      {%- if product.compare_at_price > product.price -%}
+        <span class='badge'>{{ 'general.sale' | t }}</span>
+      {%- endif -%}
+    {%- endunless %}
+  </div>
+  {% for option in product.options_with_values -%}
+    {%- assign swatches = option.values | where: 'swatch' -%}
+    {%- if swatches.size > 0 %}
+      <ul class='card-swatches' role='list'>
+        {% for value in swatches limit: 8 %}
+          <li>
+            <a
+              href='{{ product.url }}?option_values={{ value.id }}'
+              aria-label='{{ value.name | escape }}'
+            >
+              {%- render 'swatch', swatch: value.swatch -%}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif -%}
+  {%- endfor %}
+  {% if product.has_only_default_variant
+    and product.available
+    and product.requires_selling_plan == false
+  -%}
+    <product-form>
+      {% form 'product', product %}
+        <input type='hidden' name='id' value='{{ product.selected_or_first_available_variant.id }}'
+        ><button class='quick-add' type='submit'>{{ 'general.add' | t }} +</button>
+        <p data-form-error role='alert'></p>
+      {% endform %}
+    </product-form>
+  {%- else -%}
+    <a class='quick-add' href='{{ product.url }}'>{{ 'general.options' | t }} ↗</a>
+  {%- endif %}
+</article>

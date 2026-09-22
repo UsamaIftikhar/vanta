@@ -1,0 +1,49 @@
+{% layout none %}
+<!doctype html>
+<html lang='{{ request.locale.iso_code }}'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <title>
+      {{ 'general.gift_card' | t }}
+      —
+      {{ shop.name | escape }}
+    </title>
+    {% render 'design-tokens' %}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body>
+    <main class='container section-space gift-card'>
+      <p class='eyebrow'>{{ shop.name | escape }}</p>
+      <h1>{{ 'general.gift_card' | t }}</h1>
+      <p class='display'>{{ gift_card.balance | money_with_currency }}</p>
+      {% if gift_card.expired or gift_card.enabled == false %}
+        <p>{{ 'general.expired' | t }}</p>
+      {% else %}
+        <p class='gift-code'>{{ gift_card.code | format_code }}</p>
+        <div
+          id='GiftQR'
+          class='gift-qr'
+          data-identifier='{{ gift_card.qr_identifier | escape }}'
+        ></div>
+      {% endif -%}
+      {%- if gift_card.expires_on %}
+        <p>{{ gift_card.expires_on | date: format: 'date' }}</p>
+      {% endif -%}
+      <a class='button' href='{{ shop.url }}'>{{ 'general.continue' | t }} ↗</a
+      ><button data-print>{{ 'general.print' | t }}</button>
+      {%- if gift_card.pass_url -%}
+        <a href='{{ gift_card.pass_url }}'
+          ><img
+            src='{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}'
+            width='120'
+            height='40'
+            alt='Add to Apple Wallet'
+        ></a>
+      {%- endif %}
+    </main>
+    <script src='{{ 'vendor/qrcode.js' | shopify_asset_url }}' defer></script>
+    <script src='{{ 'gift-card.js' | asset_url }}' defer></script>
+  </body>
+</html>

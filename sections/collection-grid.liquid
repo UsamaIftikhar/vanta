@@ -1,0 +1,123 @@
+<section
+  class='marketing-section'
+  style='--section-bg:{{ section.settings.background }};--section-fg:{{ section.settings.foreground }};--space:{{ section.settings.spacing }}px;--text-align:{{ section.settings.alignment }}'
+>
+  <div class='container'>
+    <div class='section-heading' data-animate>
+      <div>
+        <p class='eyebrow'>{{ section.settings.eyebrow | escape }}</p>
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+      <div class='rte'>{{ section.settings.text }}</div>
+    </div>
+    <div class='collection-grid'>
+      {% for block in section.blocks %}
+        <article {{ block.shopify_attributes }} data-animate>
+          <a href='{{ block.settings.collection.url | default: routes.all_products_collection_url }}'>
+            {%- assign collection_image = block.settings.image
+              | default: block.settings.collection.featured_image
+            -%}
+            {%- render 'image', image: collection_image, demo: 'editorial' %}
+            <div class='collection-card-title'>
+              <h3>
+                {{ block.settings.heading | default: block.settings.collection.title | escape }}
+              </h3>
+              <span aria-hidden='true'>↗</span>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Collection grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "VANTA Athletics"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built for motion."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Engineered for movement. Designed for everywhere.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#101110"
+    },
+    {
+      "type": "color",
+      "id": "foreground",
+      "label": "Text color",
+      "default": "#f3f2ed"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Vertical spacing",
+      "min": 24,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Override image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection grid"
+    }
+  ]
+}
+{% endschema %}

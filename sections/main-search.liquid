@@ -1,0 +1,63 @@
+<section class='container section-space'>
+  <h1 class='display'>{{ 'general.search' | t }}</h1>
+  <predictive-search
+    data-results-label='{{ 'general.results' | t | escape }}'
+    data-url='{{ routes.predictive_search_url }}'
+  >
+    <form action='{{ routes.search_url }}' method='get' role='search'>
+      <label for='Search-{{ section.id }}' class='visually-hidden'>
+        {{- 'general.search' | t -}}
+      </label>
+      <div class='search-field'>
+        <input
+          id='Search-{{ section.id }}'
+          type='search'
+          name='q'
+          value='{{ search.terms | escape }}'
+          autocomplete='off'
+          aria-controls='Predictive-{{ section.id }}'
+          aria-expanded='false'
+          role='combobox'
+          aria-autocomplete='list'
+
+        ><button>{{ 'general.search' | t }} ↗</button>
+      </div>
+      <input type='hidden' name='options[prefix]' value='last'>
+    </form>
+    <div id='Predictive-{{ section.id }}' data-results hidden></div>
+    <p class='visually-hidden' role='status' data-search-status></p>
+  </predictive-search>
+  {% if search.performed -%}
+    {%- render 'facets', results: search, action: routes.search_url -%}
+    {%- paginate search.results by 24 %}
+      <p>
+        {{ search.results_count }}
+        {{ 'general.results' | t }}
+      </p>
+      <div class='product-grid'>
+        {% for result in search.results -%}
+          {%- if result.object_type == 'product' -%}
+            {%- render 'product-card', product: result -%}
+          {%- else %}
+            <article>
+              <a href='{{ result.url }}'>
+                {%- if result.image %}{% render 'image', image: result.image %}{% endif %}
+                <p class='eyebrow'>{{ result.object_type | escape }}</p>
+                <h2>{{ result.title | escape }}</h2>
+              </a>
+            </article>
+          {% endif -%}
+        {%- else %}
+          <p>{{ 'general.no_results' | t }}</p>
+        {% endfor %}
+      </div>
+      {% render 'pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+  {%- endif %}
+</section>
+{% schema %}
+{
+  "name": "Search",
+  "settings": []
+}
+{% endschema %}

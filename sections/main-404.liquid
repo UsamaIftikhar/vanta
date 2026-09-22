@@ -1,0 +1,20 @@
+<section class='container section-space'>
+  <p class='eyebrow'>404</p>
+  <h1 class='display'>{{ section.settings.heading | escape }}</h1>
+  <a class='button' href='{{ routes.all_products_collection_url }}'>
+    {{- 'general.continue' | t }} ↗</a
+  >
+</section>
+{% schema %}
+{
+  "name": "404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A step off the beaten path."
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title"
+        },
+        "price": {
+          "type": "price"
+        },
+        "options": {
+          "type": "options"
+        },
+        "buy": {
+          "type": "buy"
+        },
+        "pickup": {
+          "type": "pickup"
+        },
+        "description": {
+          "type": "description"
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "options",
+        "buy",
+        "pickup",
+        "description"
+      ]
+    },
+    "related": {
+      "type": "product-recommendations"
+    }
+  },
+  "order": [
+    "main",
+    "related"
+  ]
+}

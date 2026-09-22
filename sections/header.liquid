@@ -1,0 +1,151 @@
+<vanta-header
+  data-mode='{{ section.settings.sticky }}'
+  class='site-header {% if section.settings.transparent and request.page_type == 'index' %}header-overlay{% endif %}'
+>
+  <div class='header-inner container'>
+    <details class='mobile-menu'>
+      <summary aria-label='{{ 'general.menu' | t }}'>☰</summary>
+      <div class='mobile-menu-panel'>
+        <nav aria-label='{{ 'general.menu' | t }}'>
+          {% render 'menu', menu: section.settings.menu %}
+        </nav>
+        {% render 'localization', id: 'MobileLocalization' %}
+      </div>
+    </details>
+    <a
+      class='wordmark'
+      href='{{ routes.root_url }}'
+      style='--logo-width:{{ section.settings.logo_width }}px'
+    >
+      {%- if section.settings.logo -%}
+        {{-
+          section.settings.logo
+          | image_url: width: 500
+          | image_tag: widths: '120,240,360,500', sizes: '240px', alt: shop.name
+        -}}
+      {%- else -%}
+        {{- settings.brand_label | default: shop.name | escape -}}
+        <span class='brand-dot' aria-hidden='true'>®</span>
+      {%- endif -%}
+      {%- if section.settings.alternate_logo -%}
+        {{-
+          section.settings.alternate_logo
+          | image_url: width: 500
+          | image_tag: class: 'alternate-logo', alt: shop.name
+        -}}
+      {%- endif -%}
+    </a>
+    <nav class='desktop-nav' aria-label='{{ 'general.menu' | t }}'>
+      {% render 'menu', menu: section.settings.menu %}
+    </nav>
+    <div class='header-actions'>
+      <details class='header-search'>
+        <summary>{{ 'general.search' | t }}</summary>
+        <div class='header-search-panel'>{% render 'predictive-form', id: section.id %}</div>
+      </details>
+      {% if shop.customer_accounts_enabled -%}
+        <shopify-account
+          ><a href='{{ routes.account_url }}'>{{ 'general.account' | t }}</a></shopify-account
+        >
+      {%- endif -%}
+      <a href='{{ routes.cart_url }}' data-open-cart>
+        {{- 'general.cart' | t }}
+        <span data-cart-count>{{ cart.item_count }}</span></a
+      >
+    </div>
+  </div>
+  {% for block in section.blocks -%}
+    {%- if block.settings.image %}
+      <div class='menu-promotion' {{ block.shopify_attributes }}>
+        <a href='{{ block.settings.link }}'>
+          {%- render 'image', image: block.settings.image -%}
+          {{- block.settings.label | escape -}}
+        </a>
+      </div>
+    {% endif -%}
+  {%- endfor %}
+</vanta-header>
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation",
+      "default": "main-menu"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "alternate_logo",
+      "label": "Overlay logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 160
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent",
+      "label": "Overlay on homepage",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "sticky",
+      "label": "Sticky behavior",
+      "options": [
+        {
+          "value": "always",
+          "label": "Always"
+        },
+        {
+          "value": "reveal",
+          "label": "Reveal on scroll up"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "always"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promotion",
+      "name": "Menu promotion",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Explore the collection"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

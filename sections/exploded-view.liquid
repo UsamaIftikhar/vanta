@@ -1,0 +1,261 @@
+<section
+  class='marketing-section'
+  style='--section-bg:{{ section.settings.background }};--section-fg:{{ section.settings.foreground }};--space:{{ section.settings.spacing }}px;--text-align:{{ section.settings.alignment }}'
+>
+  <div class='container'>
+    <div class='section-heading' data-animate>
+      <div>
+        <p class='eyebrow'>{{ section.settings.eyebrow | escape }}</p>
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+      <div class='rte'>{{ section.settings.text }}</div>
+    </div>
+    {% render 'product-scene' %}
+    <p class='muted'>{{ section.settings.caption | escape }}</p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Exploded product view",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "VANTA Athletics"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built for motion."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Engineered for movement. Designed for everywhere.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#101110"
+    },
+    {
+      "type": "color",
+      "id": "foreground",
+      "label": "Text color",
+      "default": "#f3f2ed"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Vertical spacing",
+      "min": 24,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "url",
+      "id": "model",
+      "label": "GLB model URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Poster / fallback image"
+    },
+    {
+      "type": "range",
+      "id": "scale",
+      "label": "Model scale",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "rotation",
+      "label": "Starting rotation",
+      "min": -180,
+      "max": 180,
+      "step": 5,
+      "unit": "deg",
+      "default": -20
+    },
+    {
+      "type": "range",
+      "id": "camera",
+      "label": "Camera distance",
+      "min": 2,
+      "max": 8,
+      "step": 0.5,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "camera_angle",
+      "label": "Camera elevation",
+      "min": -40,
+      "max": 60,
+      "step": 5,
+      "unit": "deg",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "position_x",
+      "label": "Horizontal position",
+      "min": -100,
+      "max": 100,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "position_y",
+      "label": "Vertical position",
+      "min": -100,
+      "max": 100,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "Auto rotation",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "rotation_speed",
+      "label": "Rotation speed",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "pointer",
+      "label": "Pointer interaction",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "scroll",
+      "label": "Scroll rotation",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "lighting",
+      "label": "Lighting",
+      "options": [
+        {
+          "value": "studio",
+          "label": "Studio"
+        },
+        {
+          "value": "edge",
+          "label": "Edge light"
+        }
+      ],
+      "default": "studio"
+    },
+    {
+      "type": "select",
+      "id": "mobile",
+      "label": "Mobile behavior",
+      "options": [
+        {
+          "value": "poster",
+          "label": "Poster with 3D button"
+        },
+        {
+          "value": "interactive",
+          "label": "Load interactive 3D"
+        }
+      ],
+      "default": "poster"
+    },
+    {
+      "type": "select",
+      "id": "reduced",
+      "label": "Reduced motion",
+      "options": [
+        {
+          "value": "poster",
+          "label": "Poster with 3D button"
+        },
+        {
+          "value": "static",
+          "label": "Static interactive model"
+        }
+      ],
+      "default": "poster"
+    },
+    {
+      "type": "range",
+      "id": "explode",
+      "label": "Explode distance",
+      "min": 0,
+      "max": 3,
+      "step": 0.1,
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direction",
+      "options": [
+        {
+          "value": "x",
+          "label": "X"
+        },
+        {
+          "value": "y",
+          "label": "Y"
+        },
+        {
+          "value": "z",
+          "label": "Z"
+        }
+      ],
+      "default": "y"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "Explore how it comes together."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Exploded product view"
+    }
+  ]
+}
+{% endschema %}

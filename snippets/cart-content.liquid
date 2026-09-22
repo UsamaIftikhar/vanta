@@ -1,0 +1,99 @@
+{% if cart.empty? %}
+  <div class='empty-state'>
+    <p class='display'>{{ 'general.empty_cart' | t }}</p>
+    <a class='button' href='{{ routes.all_products_collection_url }}'>
+      {{- 'general.continue' | t }} ↗</a
+    >
+  </div>
+{% else %}
+  <form action='{{ routes.cart_url }}' method='post' class='cart-form'>
+    <div class='cart-lines'>
+      {% for item in cart.items %}
+        <article class='cart-line'>
+          <a href='{{ item.url }}'>{% render 'image', image: item.image, sizes: '120px' %}</a>
+          <div>
+            <h2>
+              <a href='{{ item.url }}'>{{ item.product.title | escape }}</a>
+            </h2>
+            {% unless item.product.has_only_default_variant -%}
+              {%- for option in item.options_with_values %}
+                <p class='muted'>{{ option.name | escape }}: {{ option.value | escape }}</p>
+              {% endfor -%}
+            {%- endunless -%}
+            {%- if item.selling_plan_allocation %}
+              <p>{{ item.selling_plan_allocation.selling_plan.name | escape }}</p>
+            {% endif -%}
+            {%- for property in item.properties -%}
+              {%- assign first_character = property.first | slice: 0 -%}
+              {%- unless property.last == blank or first_character == '_' %}
+                <p>
+                  {{ property.first | escape }}:
+                  {% if property.last contains '/uploads/' -%}
+                    <a href='{{ property.last }}'>
+                      {{- property.last | split: '/' | last | escape -}}
+                    </a>
+                  {%- else -%}
+                    {{- property.last | escape -}}
+                  {%- endif %}
+                </p>
+              {% endunless -%}
+            {%- endfor %}
+            <p>
+              {% if item.original_price != item.final_price -%}
+                <s>{{ item.original_price | money }}</s>
+              {% endif -%}
+              {{- item.final_price | money_with_currency }}
+            </p>
+            {% if item.unit_price_measurement -%}
+              <small>
+                {{- item.unit_price | money }} / {{ item.unit_price_measurement.reference_value -}}
+                {{- item.unit_price_measurement.reference_unit -}}
+              </small>
+            {%- endif -%}
+            {%- for discount in item.line_level_discount_allocations %}
+              <p>
+                {{ discount.discount_application.title | escape }} (−{{ discount.amount | money }})
+              </p>
+            {% endfor -%}
+            <label class='quantity-label'>
+              {{- 'general.quantity' | t -}}
+              <input
+                type='number'
+                name='updates[]'
+                value='{{ item.quantity }}'
+                min='0'
+                step='{{ item.variant.quantity_rule.increment | default: 1 }}'
+                data-line-key='{{ item.key | escape }}'></label
+            ><a href='{{ item.url_to_remove }}' data-remove-key='{{ item.key | escape }}'>
+              {{- 'general.remove' | t -}}
+            </a>
+          </div>
+          <strong>{{ item.final_line_price | money_with_currency }}</strong>
+        </article>
+      {% endfor %}
+    </div>
+    <div class='cart-summary'>
+      <label>
+        {{- 'general.note' | t -}}
+        <textarea name='note'>{{ cart.note | escape }}</textarea>
+      </label>
+      {%- for discount in cart.cart_level_discount_applications %}
+        <p>{{ discount.title | escape }} −{{ discount.total_allocated_amount | money }}</p>
+      {% endfor %}
+      <p class='subtotal'>
+        {{ 'general.subtotal' | t }}
+        <strong>{{ cart.total_price | money_with_currency }}</strong>
+      </p>
+      <p class='muted'>
+        {% if cart.taxes_included %}{{ 'general.taxes' | t }} {% endif -%}
+        {{- 'general.shipping' | t }}
+      </p>
+      <button type='submit' name='update'>{{ 'general.update' | t }}</button
+      ><button type='submit' name='checkout' class='button'>{{ 'general.checkout' | t }} ↗</button>
+      {%- if additional_checkout_buttons and drawer != true %}
+        <div class='additional-checkout-buttons'>{{ content_for_additional_checkout_buttons }}</div>
+      {% endif %}
+    </div>
+  </form>
+{% endif %}
+<p data-cart-error role='alert'></p>

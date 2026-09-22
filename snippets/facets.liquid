@@ -1,0 +1,89 @@
+<form class='facets' method='get' action='{{ action }}'>
+  {% if request.page_type == 'search' -%}
+    <input type='hidden' name='q' value='{{ search.terms | escape }}'
+    ><input type='hidden' name='options[prefix]' value='last'>
+  {%- endif %}
+  <div class='filter-row'>
+    {% for filter in results.filters %}
+      <details>
+        <summary>
+          {{ filter.label | escape -}}
+          {%- if filter.active_values.size > 0 %} ({{ filter.active_values.size }}){% endif %}
+        </summary>
+        <div class='filter-panel'>
+          {% case filter.type -%}
+            {%- when 'boolean', 'list' -%}
+              {%- for value in filter.values -%}
+                <label class='check-label'
+                  ><input
+                    type='checkbox'
+                    name='{{ value.param_name }}'
+                    value='{{ value.value | escape }}'
+                    {% if value.active %}
+                      checked
+                    {% elsif value.count == 0 %}
+                      disabled
+                    {% endif %}
+                  >
+                  {{- value.label | escape }} ({{ value.count }})</label
+                >
+              {%- endfor -%}
+            {%- when 'price_range' -%}
+              <label>
+                {{- filter.min_value.param_name | split: '.' | last -}}
+                <input
+                  type='number'
+                  name='{{ filter.min_value.param_name }}'
+                  min='0'
+                  step='0.01'
+                  {% if filter.min_value.value %}
+                    value='{{ filter.min_value.value | divided_by: 100.0 }}'
+                  {% endif %}
+                  placeholder='0'></label
+              ><label>
+                {{- filter.max_value.param_name | split: '.' | last -}}
+                <input
+                  type='number'
+                  name='{{ filter.max_value.param_name }}'
+                  min='0'
+                  step='0.01'
+                  max='{{ filter.range_max | divided_by: 100.0 }}'
+                  {% if filter.max_value.value %}
+                    value='{{ filter.max_value.value | divided_by: 100.0 }}'
+                  {% endif %}
+                  placeholder='{{ filter.range_max | divided_by: 100.0 }}'
+              ></label>
+          {%- endcase %}
+        </div>
+      </details>
+    {% endfor %}
+    <label>
+      {{- 'general.sort' | t -}}
+      <select name='sort_by'>
+        {% assign current_sort = results.sort_by | default: results.default_sort_by -%}
+        {%- for option in results.sort_options %}
+          <option
+            value='{{ option.value }}'
+            {% if option.value == current_sort %}
+              selected
+            {% endif %}
+          >
+            {{ option.name | escape }}
+          </option>
+        {% endfor %}
+      </select></label
+    ><button type='submit'>{{ 'general.apply' | t }}</button>
+  </div>
+  <div class='active-filters'>
+    {% for filter in results.filters -%}
+      {%- for value in filter.active_values -%}
+        <a href='{{ value.url_to_remove }}'>{{ value.label | escape }} ×</a>
+      {%- endfor -%}
+      {%- if filter.type == 'price_range' -%}
+        {%- if filter.min_value.value or filter.max_value.value -%}
+          <a href='{{ filter.url_to_remove }}'>{{ filter.label | escape }} ×</a>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor %}
+  </div>
+</form>

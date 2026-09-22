@@ -1,0 +1,5 @@
+{% if swatch.image -%}
+  {{- swatch.image | image_url: width: 60 | image_tag: class: 'swatch', alt: '' -}}
+{%- elsif swatch.color -%}
+  <span class='swatch' style='background:{{ swatch.color }}'></span>
+{%- endif %}

@@ -1,0 +1,269 @@
+{% assign selected = product.selected_or_first_available_variant %}
+<product-detail
+  class='container section-space product-detail'
+  data-section='{{ section.id }}'
+  data-product-url='{{ product.url }}'
+  data-variant='{{ selected.id }}'
+>
+  <div class='product-layout'>
+    {% render 'product-media', product: product, selected: selected %}
+    <div class='product-information'>
+      {% for block in section.blocks %}
+        <div class='product-block' {{ block.shopify_attributes }}>
+          {% case block.type %}
+            {% when '@app' -%}
+              {%- render block %}
+            {% when 'title' %}
+              <p class='eyebrow'>{{ product.type | escape }}</p>
+              {% if request.page_type == 'product' %}
+                <h1>{{ product.title | escape }}</h1>
+              {% else %}
+                <h2>
+                  <a href='{{ product.url }}'>{{ product.title | escape }}</a>
+                </h2>
+              {% endif %}
+            {% when 'vendor' %}
+              <p class='eyebrow'>{{ product.vendor | escape }}</p>
+            {% when 'price' -%}
+              {%- if selected %}{% render 'price', product: product, variant: selected %}{% endif %}
+              <p class='muted'>
+                {% if cart.taxes_included %}{{ 'general.taxes' | t }} {% endif -%}
+                {{- 'general.shipping' | t }}
+              </p>
+            {% when 'options' -%}
+              {%- render 'variant-picker', product: product %}
+            {% when 'buy' -%}
+              {%- render 'buy-buttons', product: product, selected: selected, block: block %}
+            {% when 'description' %}
+              <div class='rte'>{{ product.description }}</div>
+            {% when 'inventory' -%}
+              {%- if selected.available %}
+                <p>
+                  {{ 'general.in_stock' | t -}}
+                  {%- if selected.inventory_management and selected.inventory_policy == 'deny' %}
+                    · {{ selected.inventory_quantity -}}
+                  {%- endif %}
+                </p>
+              {% endif %}
+            {% when 'sku' -%}
+              {%- if selected.sku != blank %}
+                <p>{{ 'general.sku' | t }}: {{ selected.sku | escape }}</p>
+              {% endif %}
+            {% when 'pickup' -%}
+              {%- assign pickups = selected.store_availabilities
+                | where: 'pick_up_enabled', true
+              -%}
+              {%- if pickups.size > 0 %}
+                <details>
+                  <summary>{{ 'general.pickup' | t }}</summary>
+                  {% for pickup in pickups %}
+                    <p>
+                      {{ pickup.location.name | escape }} —
+                      {% if pickup.available -%}
+                        {{- pickup.pick_up_time | escape -}}
+                      {%- else -%}
+                        {{- 'general.unavailable' | t -}}
+                      {%- endif %}
+                    </p>
+                    {{ pickup.location.address | format_address -}}
+                  {%- endfor %}
+                </details>
+              {% endif %}
+            {% when 'collapsible' %}
+              <details>
+                <summary>{{ block.settings.heading | escape }}</summary>
+                <div class='rte'>
+                  {{ block.settings.text -}}
+                  {{- block.settings.page.content }}
+                </div>
+              </details>
+            {% when 'liquid' -%}
+              {{- block.settings.liquid }}
+            {% when 'share' -%}
+              <a href='mailto:?subject={{ product.title | url_encode }}&body={{ canonical_url | url_encode }}'>
+                {{- 'general.share' | t }} ↗</a
+              >
+          {% endcase %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% if section.settings.sticky %}
+    <div class='sticky-purchase' hidden>
+      <span>{{ product.title | escape }}</span
+      ><button
+        type='submit'
+        form='ProductForm-{{ section.id }}'
+        class='button'
+        {% unless selected.available %}
+          disabled
+        {% endunless %}
+      >
+        {% if selected.available -%}
+          {{- 'general.add' | t }} ↗
+        {%- elsif selected == blank -%}
+          {{- 'general.unavailable' | t -}}
+        {%- else -%}
+          {{- 'general.sold_out' | t -}}
+        {%- endif %}
+      </button>
+    </div>
+  {% endif -%}
+</product-detail>
+{% if request.page_type == 'product' %}
+  <script type='application/ld+json'>
+    {{ product | structured_data }}
+  </script>
+{% endif %}
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    {
+      "type": "select",
+      "id": "media_layout",
+      "label": "Media layout",
+      "options": [
+        {
+          "value": "gallery",
+          "label": "Gallery"
+        },
+        {
+          "value": "stacked",
+          "label": "Stacked"
+        },
+        {
+          "value": "sticky",
+          "label": "Sticky"
+        },
+        {
+          "value": "immersive",
+          "label": "Immersive"
+        },
+        {
+          "value": "3d-first",
+          "label": "3D-First"
+        }
+      ],
+      "default": "gallery"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky purchase link",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "options",
+      "name": "Options",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "inventory",
+      "name": "Inventory",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "sku",
+      "name": "SKU",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "pickup",
+      "name": "Pickup",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "share",
+      "name": "Share",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "buy",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "dynamic_checkout",
+          "label": "Dynamic checkout",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "recipient",
+          "label": "Gift card recipient form",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "collapsible",
+      "name": "Collapsible content",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shipping and returns"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Content"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Content page"
+        }
+      ]
+    },
+    {
+      "type": "liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "liquid",
+          "label": "Liquid"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,51 @@
+<product-scene
+  data-model='{{ section.settings.model | escape }}'
+  data-scale='{{ section.settings.scale }}'
+  data-rotation='{{ section.settings.rotation }}'
+  data-camera='{{ section.settings.camera }}'
+  data-camera-angle='{{ section.settings.camera_angle }}'
+  data-position-x='{{ section.settings.position_x }}'
+  data-position-y='{{ section.settings.position_y }}'
+  data-auto='{{ section.settings.auto_rotate }}'
+  data-speed='{{ section.settings.rotation_speed }}'
+  data-pointer='{{ section.settings.pointer }}'
+  data-scroll='{{ section.settings.scroll }}'
+  data-lighting='{{ section.settings.lighting }}'
+  data-mobile='{{ section.settings.mobile }}'
+  data-reduced='{{ section.settings.reduced }}'
+  data-explode='{{ section.settings.explode | default: 0 }}'
+  data-direction='{{ section.settings.direction | default: 'y' }}'
+>
+  <div class='scene-poster'>
+    {% render 'image', image: section.settings.poster, eager: eager, demo: 'campaign' %}
+  </div>
+  <div class='scene-canvas' aria-hidden='true'></div>
+  {% if section.settings.model != blank -%}
+    <button class='scene-enable' type='button' data-scene-enable>
+      {{ 'general.enable_3d' | t }} +
+    </button>
+    <div class='scene-controls' hidden>
+      <button type='button' data-scene-left aria-label='{{ 'general.rotate_left' | t }}'>←</button
+      ><button type='button' data-scene-reset>{{ 'general.reset' | t }}</button
+      ><button type='button' data-scene-right aria-label='{{ 'general.rotate_right' | t }}'>
+        →
+      </button>
+      {%- if section.settings.auto_rotate -%}
+        <button
+          type='button'
+          data-scene-pause
+          data-pause='{{ 'general.pause' | t }}'
+          data-resume='{{ 'general.resume' | t }}'
+        >
+          {{ 'general.pause' | t }}
+        </button>
+      {%- endif -%}
+      <button type='button' data-scene-fullscreen>{{ 'general.fullscreen' | t }}</button>
+    </div>
+    <p
+      class='scene-status'
+      role='status'
+      data-failure='{{ 'general.model_failed' | t | escape }}'
+    ></p>
+  {% endif %}
+</product-scene>

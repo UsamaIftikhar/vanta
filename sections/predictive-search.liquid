@@ -1,0 +1,31 @@
+{% if predictive_search.performed %}
+  <ul role='listbox' aria-label='{{ 'general.results' | t }}'>
+    {% for product in predictive_search.resources.products %}
+      <li role='option' aria-selected='false'>
+        <a href='{{ product.url }}'>{{ product.title | escape }} — {{ product.price | money }}</a>
+      </li>
+    {% endfor -%}
+    {%- for page in predictive_search.resources.pages %}
+      <li role='option' aria-selected='false'>
+        <a href='{{ page.url }}'>{{ page.title | escape }}</a>
+      </li>
+    {% endfor -%}
+    {%- for article in predictive_search.resources.articles %}
+      <li role='option' aria-selected='false'>
+        <a href='{{ article.url }}'>{{ article.title | escape }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% if predictive_search.resources.products.size == 0
+    and predictive_search.resources.pages.size == 0
+    and predictive_search.resources.articles.size == 0
+  %}
+    <p>{{ 'general.no_results' | t }}</p>
+  {% endif -%}
+{%- endif %}
+{% schema %}
+{
+  "name": "Predictive search",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+<section class='container section-space'>
+  <div class='article-content'>
+    <h1 class='display'>{{ page.title | escape }}</h1>
+    <div class='rte'>{{ page.content }}</div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}
