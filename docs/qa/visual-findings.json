@@ -1,0 +1,142 @@
+[
+  {
+    "name": "home",
+    "width": 390,
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "product",
+    "width": 390,
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "collection",
+    "width": 390,
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "cart",
+    "width": 390,
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "search",
+    "width": 390,
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "home",
+    "width": 768,
+    "height": 1024,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "product",
+    "width": 768,
+    "height": 1024,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "collection",
+    "width": 768,
+    "height": 1024,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "cart",
+    "width": 768,
+    "height": 1024,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "search",
+    "width": 768,
+    "height": 1024,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "home",
+    "width": 1440,
+    "height": 1000,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "product",
+    "width": 1440,
+    "height": 1000,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "collection",
+    "width": 1440,
+    "height": 1000,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "cart",
+    "width": 1440,
+    "height": 1000,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "search",
+    "width": 1440,
+    "height": 1000,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "home",
+    "width": 1920,
+    "height": 1080,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "product",
+    "width": 1920,
+    "height": 1080,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "collection",
+    "width": 1920,
+    "height": 1080,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "cart",
+    "width": 1920,
+    "height": 1080,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "search",
+    "width": 1920,
+    "height": 1080,
+    "overflow": false,
+    "errors": []
+  }
+]

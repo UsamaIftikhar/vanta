@@ -1,0 +1,80 @@
+[
+  {
+    "page": "home",
+    "mode": "mobile",
+    "scores": {
+      "performance": 73,
+      "accessibility": 100,
+      "best-practices": 54,
+      "seo": 100
+    },
+    "LCP": 5400.7182999999995,
+    "CLS": 0.0003819507369086687,
+    "TBT": 215.5
+  },
+  {
+    "page": "collection",
+    "mode": "mobile",
+    "scores": {
+      "performance": 83,
+      "accessibility": 100,
+      "best-practices": 54,
+      "seo": 100
+    },
+    "LCP": 4219.533600000001,
+    "CLS": 0,
+    "TBT": 11.5
+  },
+  {
+    "page": "product",
+    "mode": "mobile",
+    "scores": {
+      "performance": 90,
+      "accessibility": 100,
+      "best-practices": 77,
+      "seo": 100
+    },
+    "LCP": 3424.6428999999994,
+    "CLS": 0,
+    "TBT": 24.5
+  },
+  {
+    "page": "home",
+    "mode": "desktop",
+    "scores": {
+      "performance": 87,
+      "accessibility": 100,
+      "best-practices": 54,
+      "seo": 100
+    },
+    "LCP": 3679.813,
+    "CLS": 0,
+    "TBT": 16
+  },
+  {
+    "page": "collection",
+    "mode": "desktop",
+    "scores": {
+      "performance": 90,
+      "accessibility": 100,
+      "best-practices": 54,
+      "seo": 100
+    },
+    "LCP": 2470.3367,
+    "CLS": 0,
+    "TBT": 41.5
+  },
+  {
+    "page": "product",
+    "mode": "desktop",
+    "scores": {
+      "performance": 88,
+      "accessibility": 100,
+      "best-practices": 77,
+      "seo": 100
+    },
+    "LCP": 3627.522900000001,
+    "CLS": 0,
+    "TBT": 76
+  }
+]

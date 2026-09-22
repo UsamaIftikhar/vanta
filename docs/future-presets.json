@@ -1,0 +1,20 @@
+{
+  "AURA": {
+    "background": "#faf7f1",
+    "foreground": "#252320",
+    "accent": "#d8baa1",
+    "secondary": "#eee7dd",
+    "muted": "#625d57",
+    "border": "#d3c9be",
+    "reveal": "fade"
+  },
+  "FORGE": {
+    "background": "#edf0ef",
+    "foreground": "#101615",
+    "accent": "#9be0be",
+    "secondary": "#dce3df",
+    "muted": "#4c5953",
+    "border": "#aab8b0",
+    "reveal": "none"
+  }
+}
