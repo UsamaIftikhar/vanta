@@ -120,3 +120,39 @@ test('404, cart, collections and empty search render semantic pages', async ({ p
     ).toBeTruthy();
   }
 });
+
+test('contact template renders a native Shopify form', async ({ page }) => {
+  const contactResponse = await page.goto('/pages/contact');
+  test.skip(!contactResponse?.ok(), 'Store does not have a contact page resource');
+  await expect(page.locator('main h1')).toHaveCount(1);
+  const contact = page.locator('form.contact-form');
+  await expect(contact).toHaveCount(1);
+  await expect(contact.locator('input[name="contact[email]"]')).toHaveAttribute('required', '');
+  await expect(contact.locator('textarea[name="contact[body]"]')).toHaveAttribute('required', '');
+  await expect(contact.locator('button[type="submit"]')).toBeEnabled();
+});
+
+test('blog template renders native Shopify content', async ({ page }) => {
+  const blogResponse = await page.goto('/blogs/news');
+  test.skip(!blogResponse?.ok(), 'Store does not have a News blog resource');
+  await expect(page.locator('main h1')).toHaveCount(1);
+  await expect(page.locator('body')).not.toContainText('Liquid error');
+});
+
+test('cart exposes a native Shopify checkout handoff', async ({ page, request }) => {
+  const catalog = await request.get('/products.json?limit=250').then((response) => response.json());
+  const product = catalog.products?.find((item) =>
+    item.variants.some((variant) => variant.available),
+  );
+  test.skip(!product, 'Store requires a purchasable test product');
+  await page.goto(`/products/${product.handle}`);
+  const add = page.locator('.purchase-button');
+  test.skip(await add.isDisabled(), 'Selected variant is unavailable');
+  await add.click();
+  const form = page.locator('#CartDrawer form.cart-form');
+  await expect(form).toHaveAttribute('action', /\/cart$/);
+  await expect(form).toHaveAttribute('method', 'post');
+  const checkout = form.locator('button[name="checkout"]');
+  await expect(checkout).toBeEnabled();
+  await expect(checkout).toHaveAttribute('type', 'submit');
+});
