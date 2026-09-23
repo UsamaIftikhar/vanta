@@ -150,7 +150,8 @@
       "type": "featured-collection",
       "settings": {
         "heading": "Your next move.",
-        "text": "<p>Original fictional silhouettes. A study in possibility.</p>"
+        "text": "<p>Original fictional silhouettes. A study in possibility.</p>",
+        "collection": "all"
       }
     },
     "marquee": {
