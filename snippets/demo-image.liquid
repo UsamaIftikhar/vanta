@@ -30,6 +30,18 @@
     fetchpriority='{{ priority }}'
     class='demo-image demo-image--editorial {{ class }}'
   >
+{% elsif kind == 'motion-portrait' %}
+  <img
+    src='{{ 'vanta-motion-portrait.jpg' | asset_url }}'
+    srcset='{{ 'vanta-motion-portrait-small.jpg' | asset_url }} 640w, {{ 'vanta-motion-portrait.jpg' | asset_url }} 819w'
+    sizes='{{ sizes | default: '(min-width: 990px) 50vw, 100vw' }}'
+    width='819'
+    height='1024'
+    alt='Runner moving through monumental concrete architecture in VANTA footwear'
+    loading='{{ image_loading }}'
+    fetchpriority='{{ priority }}'
+    class='demo-image demo-image--editorial {{ class }}'
+  >
 {% elsif kind == 'technology' %}
   <img
     src='{{ 'vanta-technology.jpg' | asset_url }}'

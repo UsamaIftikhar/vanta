@@ -36,6 +36,8 @@ Hero cutout prompt: Use case: product-mockup. Asset type: premium Shopify sneake
 
 Movement prompt: Use case: ads-marketing. Asset type: wide editorial campaign image. Create an original cinematic VANTA Athletics urban movement photograph with an anonymous runner in charcoal technical clothing and pearl-white/acid-lime footwear moving through monumental concrete architecture. Wide landscape framing, full body in the right third, architectural negative space on the left, both shoes fully visible, early-morning directional light, no text, watermark or recognizable brand marks.
 
+`assets/vanta-motion-portrait.jpg` and its small variant are deterministic 4:5 delivery crops of the same movement source. The crop was positioned around the right-hand subject so the complete athlete and both shoes remain in frame; it is used where a portrait container would otherwise destroy the landscape composition.
+
 Technology prompt: Use case: product-mockup. Asset type: premium ecommerce technology-detail image. Create an original macro editorial photograph of a fictional VANTA sneaker showing engineered knit, sculpted foam, carbon-like support plate and acid-lime thread. Landscape detail composition, deliberate heel/midsole crop, dramatic raking light on near-black, plausible construction, no text, watermark or recognizable brand marks.
 
 ## Bundled original 3D sneaker

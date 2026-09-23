@@ -4,12 +4,7 @@
     assign scene_model = 'vanta-concept.glb' | asset_url
   endif
 %}
-{% assign motion_kind = 'hero' %}
-{% if section.type == 'immersive-story' or section.type == 'product-hotspots' %}
-  {% assign motion_kind = 'technology' %}
-{% elsif section.type == 'product-360' or section.type == 'exploded-view' %}
-  {% assign motion_kind = 'aero' %}
-{% endif %}
+{% assign motion_kind = motion_kind | default: 'hero' %}
 {% if scene_model == blank %}
   <motion-product class='motion-product motion-product--{{ motion_kind }}' data-depth-scene>
     <span class='motion-orbit motion-orbit--one' aria-hidden='true'></span>
@@ -46,9 +41,9 @@
     data-explode='{{ section.settings.explode | default: 0 }}'
     data-direction='{{ section.settings.direction | default: 'y' }}'
   >
-  <div class='scene-poster'>
-    {% render 'image', image: section.settings.poster, eager: eager, demo: motion_kind %}
-  </div>
+    <div class='scene-poster'>
+      {% render 'image', image: section.settings.poster, eager: eager, demo: motion_kind %}
+    </div>
     <div class='scene-canvas' aria-hidden='true'></div>
     {% if scene_model != blank -%}
       <button class='scene-enable' type='button' data-scene-enable>

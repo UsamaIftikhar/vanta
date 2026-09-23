@@ -12,7 +12,7 @@
     </div>
     <div class='hotspot-layout'>
       <div class='hotspot-media'>
-        {% render 'product-scene' -%}
+        {% render 'product-scene', motion_kind: 'hero' -%}
         {%- for block in section.blocks -%}
           <a
             class='hotspot-dot'

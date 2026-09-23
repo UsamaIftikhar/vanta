@@ -53,3 +53,4 @@ Final focused Chromium rerun after dialog/race fixes: 2 passed (navigation/focus
 - Reworked default section imagery to avoid repeating the same stair/campaign frame and added contain/cover rules by asset intent so catalog products remain fully visible while editorial images crop intentionally.
 - Added a native configurable size-guide product block and a branded demo-media fallback for products without media.
 - Structural tests pass and Theme Check reports 93 files with zero offenses. Authenticated storefront screenshots/browser reruns remain required after uploading this revision.
+- Corrected the section-render routing bug that caused the hero cutout to appear in every image-motion scene. Desktop story cards now form a complete three-column row, portrait placements use a purpose-cut 4:5 movement asset, and mobile editorial media retains 4:5 framing instead of being forced square.

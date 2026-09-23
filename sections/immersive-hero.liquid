@@ -20,7 +20,7 @@
     <div class='hero-product'>
       {% assign eager = false -%}
       {%- if section.index == 1 %}{% assign eager = true %}{% endif -%}
-      {%- render 'product-scene', eager: eager %}
+      {%- render 'product-scene', eager: eager, motion_kind: 'hero' %}
     </div>
     <div class='hero-footer'>
       <span>{{ section.settings.caption | escape }}</span><span aria-hidden='true'>↓</span

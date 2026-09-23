@@ -11,7 +11,7 @@
       <div class='rte'>{{ section.settings.text }}</div>
     </div>
     <div class='story-layout'>
-      <div class='story-scene'>{% render 'product-scene' %}</div>
+      <div class='story-scene'>{% render 'product-scene', motion_kind: 'technology' %}</div>
       <div class='story-frames'>
         {% for block in section.blocks %}
           <article

@@ -18,7 +18,7 @@
               | default: block.settings.collection.featured_image
             -%}
             {% assign demo_kind = 'editorial' -%}
-            {%- if forloop.index == 2 %}{% assign demo_kind = 'motion' %}{% endif -%}
+            {%- if forloop.index == 2 %}{% assign demo_kind = 'motion-portrait' %}{% endif -%}
             {%- render 'image', image: collection_image, demo: demo_kind %}
             <div class='collection-card-title'>
               <h3>
