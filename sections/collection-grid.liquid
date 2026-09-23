@@ -15,6 +15,7 @@
         <article {{ block.shopify_attributes }} data-animate>
           <a href='{{ block.settings.collection.url | default: routes.all_products_collection_url }}'>
             {%- assign collection_image = block.settings.image
+              | default: block.settings.collection.image
               | default: block.settings.collection.featured_image
             -%}
             {% assign demo_kind = 'editorial' -%}

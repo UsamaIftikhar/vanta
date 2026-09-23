@@ -1,25 +1,71 @@
 <footer class='site-footer container section-space'>
-  <div class='footer-top'>
+  <div class='footer-cta'>
     <div>
+      <p class='eyebrow'>{{ section.settings.cta_eyebrow | escape }}</p>
+      <h2>{{ section.settings.cta_heading | escape }}</h2>
+    </div>
+    <a class='button button--light' href='{{ routes.all_products_collection_url }}'>
+      {{- section.settings.cta_label | escape }} ↗</a
+    >
+  </div>
+
+  <div class='footer-top'>
+    <div class='footer-intro'>
       <a class='footer-brand' href='{{ routes.root_url }}'>
         {{- settings.brand_label | default: shop.name | escape -}}
       </a>
       <p>{{ section.settings.text | escape }}</p>
-      {% if settings.instagram -%}
-        <a href='{{ settings.instagram }}'>Instagram ↗</a>
-      {%- endif %}
-      {% if settings.tiktok -%}
-        <a href='{{ settings.tiktok }}'>TikTok ↗</a>
-      {%- endif %}
+      {%- assign instagram_url = settings.instagram | default: 'https://www.instagram.com/' -%}
+      {%- assign facebook_url = settings.facebook | default: 'https://www.facebook.com/' -%}
+      {%- assign tiktok_url = settings.tiktok | default: 'https://www.tiktok.com/' -%}
+      <div class='footer-socials' aria-label='Social media'>
+        <a href='{{ instagram_url }}' target='_blank' rel='noopener noreferrer'>
+          <span>Instagram</span><span aria-hidden='true'>↗</span>
+        </a>
+        <a href='{{ facebook_url }}' target='_blank' rel='noopener noreferrer'>
+          <span>Facebook</span><span aria-hidden='true'>↗</span>
+        </a>
+        <a href='{{ tiktok_url }}' target='_blank' rel='noopener noreferrer'>
+          <span>TikTok</span><span aria-hidden='true'>↗</span>
+        </a>
+      </div>
     </div>
+
+    <nav class='footer-nav' aria-label='Shop'>
+      <h2 class='eyebrow'>Shop</h2>
+      <ul role='list'>
+        <li><a href='{{ routes.all_products_collection_url }}'>All shoes</a></li>
+        <li><a href='{{ routes.collections_url }}/casual'>Casual</a></li>
+        <li><a href='{{ routes.collections_url }}/lifestyle'>Lifestyle</a></li>
+        <li><a href='{{ routes.collections_url }}/performance'>Performance</a></li>
+        <li><a href='{{ routes.collections_url }}/formal'>Formal</a></li>
+      </ul>
+    </nav>
+
+    <nav class='footer-nav' aria-label='Help and information'>
+      <h2 class='eyebrow'>Help</h2>
+      <ul role='list'>
+        <li><a href='/pages/contact'>Contact</a></li>
+        <li><a href='{{ routes.search_url }}'>Search</a></li>
+        <li><a href='/blogs/news'>Journal</a></li>
+        <li><a href='{{ routes.account_url }}'>Account</a></li>
+        <li><a href='{{ routes.cart_url }}'>Your bag</a></li>
+      </ul>
+    </nav>
+
     {% for block in section.blocks %}
-      <div {{ block.shopify_attributes }}>
+      <nav class='footer-nav' aria-label='{{ block.settings.heading | escape }}' {{ block.shopify_attributes }}>
         <h2 class='eyebrow'>{{ block.settings.heading | escape }}</h2>
         {% render 'menu', menu: block.settings.menu %}
-      </div>
+      </nav>
     {% endfor %}
   </div>
-  {% render 'localization', id: 'FooterLocalization' %}
+
+  <div class='footer-utility'>
+    {% render 'localization', id: 'FooterLocalization' %}
+    {% if section.settings.follow %}{{ shop | login_button: action: 'follow' }}{% endif %}
+  </div>
+
   <div class='footer-bottom'>
     <small
       >© {{ 'now' | date: '%Y' }}
@@ -28,19 +74,16 @@
     <ul class='inline-list'>
       {% for policy in shop.policies -%}
         {%- if policy.body != blank %}
-          <li>
-            <a href='{{ policy.url }}'>{{ policy.title | escape }}</a>
-          </li>
+          <li><a href='{{ policy.url }}'>{{ policy.title | escape }}</a></li>
         {% endif -%}
       {%- endfor %}
     </ul>
-    <ul class='payment-icons' role='list'>
+    <ul class='payment-icons' role='list' aria-label='Accepted payment methods'>
       {% for type in shop.enabled_payment_types %}
         <li>{{ type | payment_type_svg_tag }}</li>
       {% endfor %}
     </ul>
   </div>
-  {% if section.settings.follow %}{{ shop | login_button: action: 'follow' }}{% endif %}
 </footer>
 {% schema %}
 {
@@ -48,9 +91,27 @@
   "settings": [
     {
       "type": "text",
+      "id": "cta_eyebrow",
+      "label": "Callout eyebrow",
+      "default": "VANTA / New movement"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "Callout heading",
+      "default": "Find your next move."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Callout button",
+      "default": "Shop all shoes"
+    },
+    {
+      "type": "text",
       "id": "text",
       "label": "Description",
-      "default": "Engineered for movement. Designed for everywhere."
+      "default": "Independent footwear for everyday motion. Designed with intention, built to keep moving."
     },
     {
       "type": "checkbox",
@@ -62,7 +123,7 @@
   "blocks": [
     {
       "type": "menu",
-      "name": "Menu",
+      "name": "Additional menu",
       "settings": [
         {
           "type": "text",
@@ -73,8 +134,7 @@
         {
           "type": "link_list",
           "id": "menu",
-          "label": "Menu",
-          "default": "footer"
+          "label": "Menu"
         }
       ]
     }

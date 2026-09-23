@@ -28,7 +28,13 @@
       "block_order": ["title", "price", "options", "buy", "pickup", "size_guide", "description"]
     },
     "related": {
-      "type": "product-recommendations"
+      "type": "product-recommendations",
+      "settings": {
+        "eyebrow": "Complete the rotation",
+        "heading": "You may also like.",
+        "text": "More VANTA silhouettes selected to move with you.",
+        "intent": "related"
+      }
     }
   },
   "order": ["main", "related"]

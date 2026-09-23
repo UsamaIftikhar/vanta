@@ -1,5 +1,9 @@
 <details class='size-guide'>
-  <summary>{{ block.settings.heading | default: 'general.size_guide' | t | escape }}</summary>
+  {%- assign size_guide_heading = block.settings.heading -%}
+  {%- if size_guide_heading == blank -%}
+    {%- assign size_guide_heading = 'general.size_guide' | t -%}
+  {%- endif -%}
+  <summary>{{ size_guide_heading | escape }}</summary>
   <div class='size-guide__content rte'>
     {% if block.settings.page != blank %}
       {{ block.settings.page.content }}

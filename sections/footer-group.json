@@ -4,20 +4,13 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {
-        "menu": {
-          "type": "menu",
-          "settings": {
-            "heading": "Explore"
-          }
-        }
-      },
-      "block_order": [
-        "menu"
-      ]
+      "settings": {
+        "cta_eyebrow": "VANTA / New movement",
+        "cta_heading": "Find your next move.",
+        "cta_label": "Shop all shoes",
+        "text": "Independent footwear for everyday motion. Designed with intention, built to keep moving."
+      }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }

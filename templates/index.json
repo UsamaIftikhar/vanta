@@ -39,17 +39,33 @@
         "0": {
           "type": "collection",
           "settings": {
-            "heading": "The everyday"
+            "collection": "casual",
+            "heading": "Casual"
           }
         },
         "1": {
           "type": "collection",
           "settings": {
-            "heading": "The next step"
+            "collection": "lifestyle",
+            "heading": "Lifestyle"
+          }
+        },
+        "2": {
+          "type": "collection",
+          "settings": {
+            "collection": "performance",
+            "heading": "Performance"
+          }
+        },
+        "3": {
+          "type": "collection",
+          "settings": {
+            "collection": "formal",
+            "heading": "Formal"
           }
         }
       },
-      "block_order": ["0", "1"]
+      "block_order": ["0", "1", "2", "3"]
     },
     "journey": {
       "type": "horizontal-story",

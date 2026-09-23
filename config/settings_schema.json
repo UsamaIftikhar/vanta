@@ -269,8 +269,18 @@
       },
       {
         "type": "url",
+        "id": "facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
         "id": "tiktok",
         "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "youtube",
+        "label": "YouTube"
       },
       {
         "type": "text",
