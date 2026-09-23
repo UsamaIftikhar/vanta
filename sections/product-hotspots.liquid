@@ -24,13 +24,26 @@
           </a>
         {%- endfor %}
       </div>
-      <div>
+      <div class='hotspot-content'>
+        <div class='hotspot-intro'>
+          <p class='eyebrow'>{{ section.settings.panel_eyebrow | escape }}</p>
+          <h3>{{ section.settings.panel_heading | escape }}</h3>
+          <div class='rte'>{{ section.settings.panel_text }}</div>
+          <dl class='hotspot-specs'>
+            <div><dt>Upper</dt><dd>Air-knit mesh</dd></div>
+            <div><dt>Midsole</dt><dd>Sculpted foam</dd></div>
+            <div><dt>Support</dt><dd>Heel cage</dd></div>
+          </dl>
+        </div>
         {% for block in section.blocks %}
           <details
             id='Hotspot-{{ section.id }}-{{ block.id }}'
             data-hotspot
             data-rotation='{{ block.settings.rotation }}'
             data-camera='{{ block.settings.camera }}'
+            {% if forloop.first %}
+              open
+            {% endif %}
             {{ block.shopify_attributes }}
           >
             <summary>
@@ -45,6 +58,11 @@
             {%- endif %}
           </details>
         {% endfor %}
+        {% if section.settings.button_link != blank %}
+          <a class='button hotspot-cta' href='{{ section.settings.button_link }}'>
+            {{- section.settings.button_label | escape }} ↗</a
+          >
+        {% endif %}
       </div>
     </div>
   </div>
@@ -70,6 +88,35 @@
       "id": "text",
       "label": "Text",
       "default": "<p>Engineered for movement. Designed for everywhere.</p>"
+    },
+    {
+      "type": "text",
+      "id": "panel_eyebrow",
+      "label": "Detail panel eyebrow",
+      "default": "X1 / Design system"
+    },
+    {
+      "type": "text",
+      "id": "panel_heading",
+      "label": "Detail panel heading",
+      "default": "Built around the way you move."
+    },
+    {
+      "type": "richtext",
+      "id": "panel_text",
+      "label": "Detail panel text",
+      "default": "<p>Three considered layers work together to create a lighter, more grounded everyday silhouette.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Explore the X1"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
     },
     {
       "type": "color",

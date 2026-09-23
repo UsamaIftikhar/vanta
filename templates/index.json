@@ -100,6 +100,11 @@
       "settings": {
         "heading": "Form. Function. Feeling.",
         "text": "<p>A closer look at our fictional X1 concept.</p>",
+        "panel_eyebrow": "X1 / Design system",
+        "panel_heading": "Built around the way you move.",
+        "panel_text": "<p>Three considered layers work together to create a lighter, more grounded everyday silhouette.</p>",
+        "button_label": "Explore the X1",
+        "button_link": "/products/vanta-x1",
         "demo_model": false,
         "rotation": -20,
         "camera": 3.5,

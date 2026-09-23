@@ -753,13 +753,12 @@ summary:focus-visible,
   position: relative;
 }
 .hotspot-media:has(.motion-product--hotspot) {
-  width: min(100%, 680px);
-  margin-inline: auto;
+  width: 100%;
 }
 .hotspot-media .motion-product--hotspot {
   width: 100%;
   height: auto;
-  aspect-ratio: 4/5;
+  aspect-ratio: 1;
   background: #111214;
 }
 .motion-product--hotspot .motion-product__media {
@@ -776,6 +775,45 @@ summary:focus-visible,
 .motion-product--hotspot .motion-orbit,
 .motion-product--hotspot .motion-product__shadow {
   display: none;
+}
+.hotspot-content {
+  align-self: center;
+}
+.hotspot-intro {
+  padding-bottom: 34px;
+}
+.hotspot-intro h3 {
+  max-width: 480px;
+  margin: 10px 0 20px;
+  font-size: clamp(32px, 3vw, 52px);
+}
+.hotspot-intro > .rte {
+  max-width: 520px;
+  color: var(--muted);
+}
+.hotspot-specs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 32px 0 0;
+}
+.hotspot-specs div {
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.hotspot-specs dt {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hotspot-specs dd {
+  margin: 6px 0 0;
+  font-size: 13px;
+}
+.hotspot-cta {
+  width: 100%;
+  margin-top: 28px;
 }
 .hotspot-media > img {
   width: 100%;
