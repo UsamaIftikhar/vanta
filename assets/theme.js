@@ -1,6 +1,6 @@
 import { ProductForm, CartDrawer, CartPage } from './cart.js';
 import { ProductDetail, MediaGallery, ProductRecommendations } from './product.js';
-import { PredictiveSearch } from './search.js';
+import { PredictiveSearch } from './search.js?v=20260923-search-fix';
 import { VantaHeader } from './header.js';
 import { MotionProduct } from './image-motion.js';
 for (const [name, component] of Object.entries({

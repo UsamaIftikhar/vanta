@@ -48,6 +48,7 @@ export class PredictiveSearch extends Component {
         .querySelector('.shopify-section');
       if (!content) return;
       this.results.innerHTML = content.innerHTML;
+      if (!this.results.querySelector('a')) await this.catalogFallback(query);
       this.results.hidden = false;
       this.input.setAttribute('aria-expanded', 'true');
       this.querySelector('[data-search-status]').textContent =
@@ -55,6 +56,38 @@ export class PredictiveSearch extends Component {
     } catch {
       this.close();
     }
+  }
+  async catalogFallback(query) {
+    const response = await request('/products.json?limit=250', {
+      signal: this.fetcher.signal,
+    });
+    const catalog = await response.json();
+    const terms = query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    const matches = (catalog.products || [])
+      .filter((product) => {
+        const tags = Array.isArray(product.tags) ? product.tags : [product.tags || ''];
+        const text = [product.title, product.vendor, product.product_type, ...tags]
+          .join(' ')
+          .toLocaleLowerCase();
+        return terms.every((term) => text.includes(term));
+      })
+      .slice(0, 8);
+    if (!matches.length || query !== this.input.value.trim()) return;
+    const list = document.createElement('ul');
+    list.setAttribute('role', 'listbox');
+    list.setAttribute('aria-label', this.dataset.resultsLabel || 'Results');
+    const root = window.Shopify?.routes?.root || '/';
+    matches.forEach((product) => {
+      const item = document.createElement('li');
+      item.setAttribute('role', 'option');
+      item.setAttribute('aria-selected', 'false');
+      const link = document.createElement('a');
+      link.href = `${root}products/${encodeURIComponent(product.handle)}`;
+      link.textContent = product.title;
+      item.append(link);
+      list.append(item);
+    });
+    this.results.replaceChildren(list);
   }
   disconnect() {
     clearTimeout(this.timer);

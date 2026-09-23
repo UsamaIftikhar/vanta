@@ -28,8 +28,30 @@
     <p class='visually-hidden' role='status' data-search-status></p>
   </predictive-search>
   {% if search.performed -%}
-    {%- render 'facets', results: search, action: routes.search_url -%}
-    {%- paginate search.results by 24 %}
+    {%- assign normalized_terms = search.terms | strip | downcase -%}
+    {%- assign fallback_count = 0 -%}
+    {%- capture fallback_cards -%}
+      {%- if search.results_count == 0 and normalized_terms != blank -%}
+        {%- for product in collections.all.products -%}
+          {%- assign searchable_product_text = product.title
+            | append: ' '
+            | append: product.vendor
+            | append: ' '
+            | append: product.type
+            | append: ' '
+            | append: product.tags
+            | downcase
+          -%}
+          {%- if searchable_product_text contains normalized_terms -%}
+            {%- assign fallback_count = fallback_count | plus: 1 -%}
+            {%- render 'product-card', product: product -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- if search.results_count > 0 -%}
+      {%- render 'facets', results: search, action: routes.search_url -%}
+      {%- paginate search.results by 24 %}
       <p>
         {{ search.results_count }}
         {{ 'general.results' | t }}
@@ -52,7 +74,14 @@
         {% endfor %}
       </div>
       {% render 'pagination', paginate: paginate -%}
-    {%- endpaginate -%}
+      {%- endpaginate -%}
+    {%- elsif fallback_count > 0 -%}
+      <p>{{ fallback_count }} {{ 'general.results' | t }}</p>
+      <div class='product-grid'>{{ fallback_cards }}</div>
+    {%- else -%}
+      <p>0 {{ 'general.results' | t }}</p>
+      <p>{{ 'general.no_results' | t }}</p>
+    {%- endif -%}
   {%- endif %}
 </section>
 {% schema %}

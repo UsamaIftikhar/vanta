@@ -114,7 +114,7 @@ for (const product of products) {
     vendor: 'VANTA',
     productType: 'Sneakers',
     status: 'ACTIVE',
-    tags: ['VANTA', 'Sneakers', 'Footwear', 'New arrival'],
+    tags: ['VANTA', 'Sneakers', 'Footwear', 'New arrival', product.title.replace('VANTA ', '')],
     seo: {
       title: `${product.title} Premium Sneaker | VANTA`,
       description: `${product.title} in ${product.color}, designed for everyday movement.`,
