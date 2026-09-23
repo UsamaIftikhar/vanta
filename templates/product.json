@@ -18,25 +18,18 @@
         "pickup": {
           "type": "pickup"
         },
+        "size_guide": {
+          "type": "size_guide"
+        },
         "description": {
           "type": "description"
         }
       },
-      "block_order": [
-        "title",
-        "price",
-        "options",
-        "buy",
-        "pickup",
-        "description"
-      ]
+      "block_order": ["title", "price", "options", "buy", "pickup", "size_guide", "description"]
     },
     "related": {
       "type": "product-recommendations"
     }
   },
-  "order": [
-    "main",
-    "related"
-  ]
+  "order": ["main", "related"]
 }

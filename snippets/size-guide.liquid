@@ -1,0 +1,68 @@
+<details class='size-guide'>
+  <summary>{{ block.settings.heading | default: 'general.size_guide' | t | escape }}</summary>
+  <div class='size-guide__content rte'>
+    {% if block.settings.page != blank %}
+      {{ block.settings.page.content }}
+    {% elsif block.settings.text != blank %}
+      {{ block.settings.text }}
+    {% else %}
+      <p>{{ block.settings.note | escape }}</p>
+      <div class='table-scroll'>
+        <table>
+          <thead>
+            <tr>
+              <th scope='col'>US</th>
+              <th scope='col'>UK</th>
+              <th scope='col'>EU</th>
+              <th scope='col'>CM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>6</td>
+              <td>5</td>
+              <td>38</td>
+              <td>24</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>6</td>
+              <td>39</td>
+              <td>25</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>7</td>
+              <td>41</td>
+              <td>26</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>8</td>
+              <td>42</td>
+              <td>27</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>9</td>
+              <td>43</td>
+              <td>28</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>10</td>
+              <td>45</td>
+              <td>29</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>11</td>
+              <td>46</td>
+              <td>30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+  </div>
+</details>

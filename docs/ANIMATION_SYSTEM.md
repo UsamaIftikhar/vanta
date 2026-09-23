@@ -8,4 +8,6 @@ Horizontal stories use native scroll snap and ordinary horizontal scrolling, inc
 
 Reduced motion suppresses CSS animation, cancels active Web Animations and disables automatic camera motion. Optional direct model rotation remains an explicit user action. A runtime preference change stops motion. Merchant animation settings must not override operating-system preferences.
 
+The default VANTA experience uses `motion-product`, a lightweight image-depth component rather than WebGL. Pointer position produces restrained perspective, scroll adds shallow Z-like movement, story frames change the material-detail focal point, and hotspot expansion can guide the same visual. It renders a complete image before JavaScript, updates only through event-driven animation frames, has no continuous render loop and remains static under reduced motion. A configured GLB still opts a section into the separate Three.js path.
+
 Editor sections initialize through `shopify:section:load`; section reveal observers disconnect on unload. Scene, header, cart and search web components own AbortControllers. Editor block selection scrolls the selected block into view and opens containing details.

@@ -28,7 +28,7 @@ Featured collection requires a selected collection. Featured product requires a 
 
 ## Product pages
 
-Product media, title, options, prices, availability and inventory come from Shopify. Add option swatches through Shopify's native swatch configuration. Product blocks include price, options, buy buttons, pickup, description, vendor, SKU, inventory, sharing, collapsible content, Custom Liquid and app blocks. Add a collapsible block linked to a Shopify page for your size guide; enter your actual sizing measurements and regional conversions there.
+Product media, title, options, prices, availability and inventory come from Shopify. Add option swatches through Shopify's native swatch configuration. Product blocks include price, options, buy buttons, pickup, description, vendor, SKU, inventory, sharing, a dedicated size guide, collapsible content, Custom Liquid and app blocks. The size-guide block includes a starter regional table and can instead render merchant-authored rich text or a Shopify page. Replace every starter measurement with verified product sizing before launch.
 
 Gallery, stacked, sticky, immersive and 3D-first media layouts share the same purchasing logic. Videos have controls. Images open in a larger view. Native model media uses Shopify's product media rendering. Related and complementary recommendation sections use Shopify's recommendation service. Configure complementary items through Shopify's supported merchandising tools.
 
@@ -40,7 +40,7 @@ Configure filter availability in Shopify. The theme renders the filters the plat
 
 ## 3D setup
 
-The default home page includes an original stylized VANTA sneaker model. Toggle “Use bundled VANTA concept model” in a 3D section to use it. For your own product, upload a self-contained GLB to Shopify Files and paste its URL into the 3D section; that URL overrides the bundled demo. Add a poster image first: it is visible immediately and remains the complete fallback. Start with balanced quality, mobile poster mode, no automatic rotation and subtle scroll rotation. Camera distance, rotation, scale, model position and lighting tune the composition.
+The default home page uses fast image-based depth scenes and does not download Three.js. Toggle “Use bundled VANTA concept model” in a compatible section only when you want to opt into WebGL. For your own product, upload a self-contained GLB to Shopify Files and paste its URL into the section; that URL overrides the bundled demo. Add a poster image first: it is visible immediately and remains the complete fallback. Start with balanced quality, mobile poster mode, no automatic rotation and subtle scroll rotation. Camera distance, rotation, scale, model position and lighting tune the composition.
 
 Use GLB with embedded textures under 5 MB, ideally under 2 MB for mobile. Keep textures around 1024–2048px and minimize mesh/material count. The current custom engine does not support Draco/Meshopt/KTX2-compressed files. Your model artist should export an ordinary GLB and check it in the preview. A 20 MB transfer limit protects shoppers from accidental large uploads.
 
@@ -50,7 +50,7 @@ No model is required to sell products. If graphics are unsupported or a model fa
 
 ## Motion, video and mobile
 
-Choose no reveals, fade, fade-up, clip or subtle scale. The marquee is decorative, and its readable text is exposed once. Magnetic buttons and the pointer halo are off by default. Reduced motion overrides animation settings. Native scrolling is never locked for storytelling.
+Choose no reveals, fade, fade-up, clip or subtle scale. Default image-depth scenes use restrained pointer perspective, scroll movement and story-driven focal changes without a continuous render loop. The marquee is decorative, and its readable text is exposed once. Magnetic buttons and the pointer halo are off by default. Reduced motion overrides animation settings. Native scrolling is never locked for storytelling.
 
 For video, prefer Shopify-hosted MP4 with a useful poster and controls. External YouTube/Vimeo embeds load only in configured video sections. Upload portrait editorial images around 1600×2000 and landscape hero images around 1800×1200. Set Shopify focal points so meaningful details survive cropping.
 

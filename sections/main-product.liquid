@@ -77,6 +77,8 @@
                   {{- block.settings.page.content }}
                 </div>
               </details>
+            {% when 'size_guide' -%}
+              {%- render 'size-guide', block: block -%}
             {% when 'liquid' -%}
               {{- block.settings.liquid }}
             {% when 'share' -%}
@@ -250,6 +252,35 @@
           "type": "page",
           "id": "page",
           "label": "Content page"
+        }
+      ]
+    },
+    {
+      "type": "size_guide",
+      "name": "Size guide",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Size guide"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Fit note",
+          "default": "Measure heel to toe and use the nearest length. If you are between sizes, choose the larger size."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Custom guide"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Guide page"
         }
       ]
     },

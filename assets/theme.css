@@ -482,9 +482,20 @@ summary:focus-visible,
   margin-left: -15%;
   width: 120%;
 }
-.hero-product product-scene {
+.hero-product :is(product-scene, .motion-product) {
   min-height: 560px;
   height: 70svh;
+}
+.immersive-hero::before {
+  content: 'VANTA';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  translate: -50% -50%;
+  color: color-mix(in srgb, var(--section-fg) 5%, transparent);
+  font: 900 clamp(160px, 30vw, 520px) / 0.7 var(--display-font);
+  letter-spacing: -0.09em;
+  pointer-events: none;
+  white-space: nowrap;
 }
 .hero-footer {
   display: flex;
@@ -658,6 +669,11 @@ summary:focus-visible,
   aspect-ratio: 4/5;
   object-fit: cover;
 }
+.collection-grid .demo-image--product {
+  object-fit: contain;
+  padding: clamp(20px, 4vw, 64px);
+  background: color-mix(in srgb, var(--section-fg) 5%, var(--section-bg));
+}
 .collection-grid a {
   text-decoration: none;
 }
@@ -700,7 +716,7 @@ summary:focus-visible,
   top: 100px;
   height: 70svh;
 }
-.story-scene product-scene {
+.story-scene :is(product-scene, .motion-product) {
   height: 100%;
 }
 .story-frame {
@@ -790,6 +806,44 @@ summary:focus-visible,
 }
 .table-scroll {
   overflow-x: auto;
+}
+.size-guide > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+  cursor: pointer;
+}
+.size-guide > summary::after {
+  content: '+';
+  font-size: 20px;
+}
+.size-guide[open] > summary::after {
+  content: '−';
+}
+.size-guide__content {
+  padding-block: 8px 20px;
+}
+.size-guide table {
+  font-size: 13px;
+}
+.size-guide td,
+.size-guide th {
+  min-width: 64px;
+  padding: 12px 10px;
+}
+.media-item--demo {
+  display: grid;
+  place-items: center;
+  min-height: min(70svh, 720px);
+  background: radial-gradient(circle, rgb(213 250 69 / 0.08), transparent 52%);
+}
+.media-item--demo img {
+  object-fit: contain;
+}
+.media-empty {
+  min-height: 440px;
+  background: linear-gradient(135deg, var(--surface), var(--background));
 }
 table {
   width: 100%;
@@ -1408,6 +1462,92 @@ product-scene {
   isolation: isolate;
   touch-action: pan-y;
 }
+.motion-product {
+  --motion-x: 0;
+  --motion-y: 0;
+  --motion-scroll: 0;
+  --motion-rx: 0deg;
+  --motion-ry: 0deg;
+  --motion-tx: 0px;
+  --motion-ty: 0px;
+  --motion-scale: 1.02;
+  --motion-media-scale: 1.04;
+  --motion-orbit: 0deg;
+  --motion-shadow-x: 0px;
+  --motion-shadow-scale: 1;
+  --motion-focus-x: 50%;
+  display: block;
+  position: relative;
+  height: clamp(320px, 50vw, 680px);
+  overflow: hidden;
+  isolation: isolate;
+  perspective: 1200px;
+  background:
+    radial-gradient(circle at 64% 43%, rgb(213 250 69 / 0.11), transparent 24%),
+    radial-gradient(circle at 52% 58%, rgb(255 255 255 / 0.07), transparent 40%);
+}
+.motion-product__media {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--motion-rx)) rotateY(var(--motion-ry))
+    translate3d(var(--motion-tx), var(--motion-ty), 26px);
+  transition: transform 80ms linear;
+  will-change: transform;
+}
+.motion-product__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 30px rgb(0 0 0 / 0.34));
+  transform: scale(var(--motion-scale));
+}
+.motion-product--technology .motion-product__media img {
+  object-fit: cover;
+  object-position: var(--motion-focus-x) center;
+  filter: none;
+  transform: scale(var(--motion-media-scale));
+  transition:
+    transform var(--duration-slow) var(--ease-luxury),
+    object-position var(--duration-slow) var(--ease-luxury);
+}
+.motion-product__shadow {
+  position: absolute;
+  z-index: -1;
+  width: 58%;
+  height: 8%;
+  inset: auto 18% 15%;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.56);
+  filter: blur(22px);
+  transform: translateX(var(--motion-shadow-x)) scale(var(--motion-shadow-scale));
+}
+.motion-orbit {
+  position: absolute;
+  border: 1px solid rgb(213 250 69 / 0.18);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: rotate(var(--motion-orbit));
+}
+.motion-orbit--one {
+  width: 76%;
+  aspect-ratio: 1;
+  left: 16%;
+  top: 2%;
+}
+.motion-orbit--two {
+  width: 58%;
+  aspect-ratio: 1;
+  left: 27%;
+  top: 12%;
+  border-color: rgb(255 255 255 / 0.09);
+}
+.motion-product--technology .motion-orbit,
+.motion-product--technology .motion-product__shadow {
+  display: none;
+}
 product-scene .scene-poster,
 product-scene .scene-canvas {
   position: absolute;
@@ -1574,7 +1714,7 @@ product-scene:fullscreen {
   .header-actions {
     gap: 16px;
   }
-  .hero-product product-scene {
+  .hero-product :is(product-scene, .motion-product) {
     min-height: 360px;
     height: 55svh;
   }
@@ -1669,9 +1809,15 @@ product-scene:fullscreen {
     width: 120%;
     order: 0;
   }
-  .hero-product product-scene {
+  .hero-product :is(product-scene, .motion-product) {
     height: 320px;
     min-height: 0;
+  }
+  .motion-product__media {
+    transform: translate3d(0, var(--motion-ty), 0);
+  }
+  .motion-orbit {
+    opacity: 0.65;
   }
   .hero-footer {
     font-size: 8px;

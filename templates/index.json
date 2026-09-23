@@ -5,7 +5,7 @@
       "settings": {
         "button_link": "#VantaProducts",
         "button_label": "Explore the silhouettes",
-        "demo_model": true,
+        "demo_model": false,
         "auto_rotate": true,
         "rotation_speed": 10,
         "rotation": -25,
@@ -49,10 +49,7 @@
           }
         }
       },
-      "block_order": [
-        "0",
-        "1"
-      ]
+      "block_order": ["0", "1"]
     },
     "journey": {
       "type": "horizontal-story",
@@ -80,18 +77,14 @@
           }
         }
       },
-      "block_order": [
-        "0",
-        "1",
-        "2"
-      ]
+      "block_order": ["0", "1", "2"]
     },
     "hotspots": {
       "type": "product-hotspots",
       "settings": {
         "heading": "Form. Function. Feeling.",
         "text": "<p>A closer look at our fictional X1 concept.</p>",
-        "demo_model": true,
+        "demo_model": false,
         "rotation": -20,
         "camera": 3.5,
         "camera_angle": 15
@@ -125,11 +118,7 @@
           }
         }
       },
-      "block_order": [
-        "0",
-        "1",
-        "2"
-      ]
+      "block_order": ["0", "1", "2"]
     },
     "video": {
       "type": "video",
@@ -155,9 +144,7 @@
           }
         }
       },
-      "block_order": [
-        "detail"
-      ]
+      "block_order": ["detail"]
     },
     "products": {
       "type": "featured-collection",
@@ -210,8 +197,8 @@
       "settings": {
         "eyebrow": "02 / Inside the silhouette",
         "heading": "Designed in every dimension.",
-        "text": "<p>Drag to explore. Scroll to see another side of the original VANTA concept.</p>",
-        "demo_model": true,
+        "text": "<p>Move to explore. Scroll to reveal the material system behind the original VANTA concept.</p>",
+        "demo_model": false,
         "rotation": -20,
         "camera": 3.5,
         "camera_angle": 15,
@@ -252,11 +239,7 @@
           }
         }
       },
-      "block_order": [
-        "upper",
-        "sole",
-        "heel"
-      ]
+      "block_order": ["upper", "sole", "heel"]
     }
   },
   "order": [

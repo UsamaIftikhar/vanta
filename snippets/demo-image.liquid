@@ -6,7 +6,43 @@
     assign priority = 'high'
   endif
 %}
-{% if kind == 'editorial' %}
+{% if kind == 'hero' %}
+  <img
+    src='{{ 'vanta-hero-cutout.webp' | asset_url }}'
+    srcset='{{ 'vanta-hero-cutout-small.webp' | asset_url }} 960w, {{ 'vanta-hero-cutout.webp' | asset_url }} 1280w'
+    sizes='{{ sizes | default: '(min-width: 990px) 58vw, 115vw' }}'
+    width='1280'
+    height='853'
+    alt='Original VANTA performance sneaker in pearl, graphite and acid lime'
+    loading='{{ image_loading }}'
+    fetchpriority='{{ priority }}'
+    class='demo-image demo-image--product {{ class }}'
+  >
+{% elsif kind == 'motion' %}
+  <img
+    src='{{ 'vanta-motion.jpg' | asset_url }}'
+    srcset='{{ 'vanta-motion-small.jpg' | asset_url }} 800w, {{ 'vanta-motion.jpg' | asset_url }} 1536w'
+    sizes='{{ sizes | default: '(min-width: 990px) 65vw, 100vw' }}'
+    width='1536'
+    height='1024'
+    alt='Runner moving through monumental concrete architecture in VANTA footwear'
+    loading='{{ image_loading }}'
+    fetchpriority='{{ priority }}'
+    class='demo-image demo-image--editorial {{ class }}'
+  >
+{% elsif kind == 'technology' %}
+  <img
+    src='{{ 'vanta-technology.jpg' | asset_url }}'
+    srcset='{{ 'vanta-technology-small.jpg' | asset_url }} 800w, {{ 'vanta-technology.jpg' | asset_url }} 1448w'
+    sizes='{{ sizes | default: '(min-width: 990px) 55vw, 100vw' }}'
+    width='1448'
+    height='1086'
+    alt='Macro detail of VANTA engineered knit, support plate and sculpted cushioning'
+    loading='{{ image_loading }}'
+    fetchpriority='{{ priority }}'
+    class='demo-image demo-image--technology {{ class }}'
+  >
+{% elsif kind == 'editorial' %}
   <img
     src='{{ 'vanta-editorial.jpg' | asset_url }}'
     srcset='{{ 'vanta-editorial-small.jpg' | asset_url }} 480w, {{ 'vanta-editorial.jpg' | asset_url }} 1024w'
@@ -16,7 +52,7 @@
     alt='{{ 'general.demo_alt' | t }}'
     loading='{{ image_loading }}'
     fetchpriority='{{ priority }}'
-    class='{{ class }}'
+    class='demo-image demo-image--editorial {{ class }}'
   >
 {% elsif kind == 'flux' or kind == 'aero' or kind == 'terra' %}
   {% assign full_image = 'vanta-' | append: kind | append: '.jpg' %}
@@ -29,7 +65,7 @@
     height='1200'
     alt='VANTA {{ kind | capitalize }} — {{ "general.demo_label" | t }}'
     loading='{{ image_loading }}'
-    class='{{ class }}'
+    class='demo-image demo-image--product {{ class }}'
   >
 {% else %}
   <img
@@ -41,6 +77,6 @@
     alt='{{ 'general.demo_alt' | t }}'
     loading='{{ image_loading }}'
     fetchpriority='{{ priority }}'
-    class='{{ class }}'
+    class='demo-image demo-image--campaign {{ class }}'
   >
 {% endif %}

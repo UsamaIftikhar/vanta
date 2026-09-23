@@ -2,6 +2,7 @@ import { ProductForm, CartDrawer, CartPage } from './cart.js';
 import { ProductDetail, MediaGallery, ProductRecommendations } from './product.js';
 import { PredictiveSearch } from './search.js';
 import { VantaHeader } from './header.js';
+import { MotionProduct } from './image-motion.js';
 for (const [name, component] of Object.entries({
   'product-form': ProductForm,
   'cart-drawer': CartDrawer,
@@ -11,6 +12,7 @@ for (const [name, component] of Object.entries({
   'product-recommendations': ProductRecommendations,
   'predictive-search': PredictiveSearch,
   'vanta-header': VantaHeader,
+  'motion-product': MotionProduct,
 })) {
   if (!customElements.get(name)) customElements.define(name, component);
 }
@@ -21,7 +23,8 @@ const initialize = (scope = document) => {
     document.body.dataset.cursor === 'true'
   )
     import('./motion.js').then(({ initializeMotion }) => initializeMotion(scope)).catch(() => {});
-  if (scope.querySelector('product-scene')) import('./three-loader.js').catch(() => {});
+  const scene = scope.querySelector('product-scene');
+  if (scene?.dataset.model) import('./three-loader.js').catch(() => {});
 };
 initialize();
 document.addEventListener('shopify:section:load', (event) => initialize(event.target));

@@ -45,3 +45,11 @@ Final focused Chromium rerun after dialog/race fixes: 2 passed (navigation/focus
 - Enabled hero auto-rotation and drag on desktop/mobile; inserted a three-frame camera story and configured model hotspots. Reduced-motion/data-saver fallbacks remain.
 - New default-experience browser tests check actual loaded model animation, pause, photo loading and reduced-motion activation. These supplement synthetic model-failure tests.
 - Store catalog records still contain the original Shopify test products; this change populates the theme's demo photography, not those unrelated products.
+
+## Follow-up: image-first motion and visual completeness
+
+- Default hero, immersive story and product-hotspot scenes now use event-driven image depth rather than loading the bundled GLB. Three.js remains opt-in when a merchant selects a model.
+- Added distinct original hero cutout, movement campaign and macro technology artwork with responsive delivery variants and documented generation provenance.
+- Reworked default section imagery to avoid repeating the same stair/campaign frame and added contain/cover rules by asset intent so catalog products remain fully visible while editorial images crop intentionally.
+- Added a native configurable size-guide product block and a branded demo-media fallback for products without media.
+- Structural tests pass and Theme Check reports 93 files with zero offenses. Authenticated storefront screenshots/browser reruns remain required after uploading this revision.

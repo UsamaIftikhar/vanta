@@ -24,8 +24,8 @@ Exploded views require independent mesh nodes named `explode_…`. Their origina
 
 Browser tests build an original minimal GLB fixture and test successful WebGL rendering, rotation, context loss, 404, invalid data, oversized header, unavailable WebGL and removal during loading. A prepared sneaker GLB, real texture budgets, lighting review, mobile GPU profiling and physical-device validation are still required for release. Procedural fixture success does not prove production model quality.
 
-## Visible demo configuration
+## Optional demo configuration
 
-The default home page now configures `demo_model` on the hero, product story and hotspots. The bundled original `vanta-concept.glb` makes the actual engine visible without an external upload. Hero auto-rotation, drag, pause and fullscreen are enabled; mobile uses interactive loading on capable devices. Reduced motion still starts with the poster and requires explicit activation. Low-power/data-saver hints also retain activation controls.
+The default home page now uses image-motion scenes, so it does not request Three.js or a GLB. Merchants can opt an individual hero, product story, hotspot, 360 or exploded section into the engine by selecting the bundled demo model or providing a model URL. Model URLs take precedence. Reduced motion, low-power and data-saver safeguards remain active when 3D is enabled.
 
 The bundled model is a stylized sneaker with upper, sole, tread, laces and heel details. Its geometry is reproducible with `node scripts/create-demo-model.mjs`; original mesh details are batched to reduce draw calls. An uploaded model remains preferred for real product fidelity. New browser tests verify actual default canvas rendering and animation changes, distinct demo product images, story activation and reduced-motion behavior on desktop/mobile.

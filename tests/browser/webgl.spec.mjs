@@ -48,9 +48,15 @@ function triangleGLB() {
 async function inject(page, mode = 'normal') {
   await page.goto('/');
   await page.evaluate(
-    ({ mode }) => {
-      const original = document.querySelector('product-scene');
-      const next = original.cloneNode(true);
+    async ({ mode }) => {
+      if (!customElements.get('product-scene')) {
+        const themeScript = [...document.scripts].find((script) =>
+          script.src.includes('/theme.js'),
+        );
+        await import(new URL('three-loader.js', themeScript.src).href);
+      }
+      const original = document.querySelector('.immersive-hero motion-product');
+      const next = document.createElement('product-scene');
       original.replaceWith(next);
       next.dataset.model = '/vanta-fixture.glb';
       next.dataset.mobile = 'interactive';

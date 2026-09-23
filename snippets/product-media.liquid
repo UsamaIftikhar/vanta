@@ -38,7 +38,17 @@
         {%- endcase %}
       </div>
     {% else -%}
-      {{- 'product-1' | placeholder_svg_tag: 'placeholder' -}}
+      {%- if settings.demo_images -%}
+        <div class='media-item media-item--demo'>
+          {% render 'demo-image',
+            kind: 'hero',
+            eager: true,
+            sizes: '(min-width: 990px) 55vw, 100vw'
+          %}
+        </div>
+      {%- else -%}
+        <div class='media-empty' role='img' aria-label='{{ product.title | escape }}'></div>
+      {%- endif -%}
     {%- endfor %}
   </div>
   {% if product.media.size > 1 %}
