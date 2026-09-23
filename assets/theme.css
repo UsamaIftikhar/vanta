@@ -681,6 +681,9 @@ summary:focus-visible,
   padding: clamp(20px, 4vw, 64px);
   background: color-mix(in srgb, var(--section-fg) 5%, var(--section-bg));
 }
+.collection-grid .demo-image--category {
+  object-position: center;
+}
 .collection-grid a {
   text-decoration: none;
 }
@@ -1144,7 +1147,7 @@ dd {
   margin-bottom: 50px;
 }
 .collection-heading img {
-  aspect-ratio: 16/9;
+  aspect-ratio: 4/5;
   object-fit: cover;
 }
 .category-filter {

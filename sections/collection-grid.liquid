@@ -14,13 +14,18 @@
       {% for block in section.blocks %}
         <article {{ block.shopify_attributes }} data-animate>
           <a href='{{ block.settings.collection.url | default: routes.all_products_collection_url }}'>
-            {%- assign collection_image = block.settings.image
-              | default: block.settings.collection.image
-              | default: block.settings.collection.featured_image
-            -%}
-            {% assign demo_kind = 'editorial' -%}
-            {%- if forloop.index == 2 %}{% assign demo_kind = 'motion-portrait' %}{% endif -%}
-            {%- render 'image', image: collection_image, demo: demo_kind %}
+            {% liquid
+              assign collection_image = block.settings.image
+              assign collection_handle = block.settings.collection.handle
+              assign demo_kind = 'category-' | append: collection_handle
+            %}
+            {% if collection_image != blank %}
+              {%- render 'image', image: collection_image -%}
+            {% elsif collection_handle == 'casual' or collection_handle == 'lifestyle' or collection_handle == 'performance' or collection_handle == 'formal' %}
+              {%- render 'demo-image', kind: demo_kind -%}
+            {% else %}
+              {%- render 'image', image: block.settings.collection.image, demo: 'editorial' -%}
+            {% endif %}
             <div class='collection-card-title'>
               <h3>
                 {{ block.settings.heading | default: block.settings.collection.title | escape }}

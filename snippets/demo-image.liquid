@@ -54,6 +54,48 @@
     fetchpriority='{{ priority }}'
     class='demo-image demo-image--technology {{ class }}'
   >
+{% elsif kind contains 'category-' %}
+  {% assign category_name = kind | remove: 'category-' %}
+  {% assign full_image = 'vanta-category-' | append: category_name | append: '.jpg' %}
+  {% assign small_image = 'vanta-category-' | append: category_name | append: '-small.jpg' %}
+  <img
+    src='{{ full_image | asset_url }}'
+    srcset='{{ small_image | asset_url }} 510w, {{ full_image | asset_url }} 1122w'
+    sizes='{{ sizes | default: "(min-width: 990px) 45vw, 100vw" }}'
+    width='1122'
+    height='1408'
+    alt='VANTA {{ category_name | capitalize }} footwear editorial'
+    loading='{{ image_loading }}'
+    fetchpriority='{{ priority }}'
+    class='demo-image demo-image--category {{ class }}'
+  >
+{% elsif kind contains 'detail-' %}
+  {% assign detail_name = kind | remove: 'detail-' %}
+  {% assign full_image = 'vanta-detail-' | append: detail_name | append: '.jpg' %}
+  {% assign small_image = 'vanta-detail-' | append: detail_name | append: '-small.jpg' %}
+  <img
+    src='{{ full_image | asset_url }}'
+    srcset='{{ small_image | asset_url }} 720w, {{ full_image | asset_url }} 1536w'
+    sizes='{{ sizes | default: "(min-width: 990px) 30vw, 85vw" }}'
+    width='1536'
+    height='1024'
+    alt='VANTA footwear {{ detail_name | replace: "-", " " }} detail'
+    loading='{{ image_loading }}'
+    fetchpriority='{{ priority }}'
+    class='demo-image demo-image--detail {{ class }}'
+  >
+{% elsif kind == 'hotspot' %}
+  <img
+    src='{{ 'vanta-hotspot.jpg' | asset_url }}'
+    srcset='{{ 'vanta-hotspot-small.jpg' | asset_url }} 510w, {{ 'vanta-hotspot.jpg' | asset_url }} 1122w'
+    sizes='{{ sizes | default: "(min-width: 990px) 55vw, 100vw" }}'
+    width='1122'
+    height='1408'
+    alt='VANTA performance sneaker construction study'
+    loading='{{ image_loading }}'
+    fetchpriority='{{ priority }}'
+    class='demo-image demo-image--hotspot {{ class }}'
+  >
 {% elsif kind == 'editorial' %}
   <img
     src='{{ 'vanta-editorial.jpg' | asset_url }}'
