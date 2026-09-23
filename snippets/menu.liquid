@@ -1,7 +1,14 @@
 <ul class='menu-list'>
   {% for link in menu.links %}
+    {% liquid
+      assign link_title = link.title | downcase
+      assign is_catalog = false
+      if link_title == 'catalog'
+        assign is_catalog = true
+      endif
+    %}
     <li>
-      {% if link.links != blank %}
+      {% if link.links != blank or is_catalog %}
         <details>
           <summary>{{ link.title | escape }}</summary>
           <div class='submenu'>
@@ -14,34 +21,42 @@
               {{- link.title | escape }} ↗</a
             >
             <ul>
-              {% for child in link.links %}
-                <li>
-                  <a
-                    href='{{ child.url }}'
-                    {% if child.current %}
-                      aria-current='page'
+              {% if link.links != blank %}
+                {% for child in link.links %}
+                  <li>
+                    <a
+                      href='{{ child.url }}'
+                      {% if child.current %}
+                        aria-current='page'
+                      {% endif %}
+                    >
+                      {{- child.title | escape -}}
+                    </a>
+                    {%- if child.links != blank %}
+                      <ul>
+                        {% for grandchild in child.links %}
+                          <li>
+                            <a
+                              href='{{ grandchild.url }}'
+                              {% if grandchild.current %}
+                                aria-current='page'
+                              {% endif %}
+                            >
+                              {{- grandchild.title | escape -}}
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
                     {% endif %}
-                  >
-                    {{- child.title | escape -}}
-                  </a>
-                  {%- if child.links != blank %}
-                    <ul>
-                      {% for grandchild in child.links %}
-                        <li>
-                          <a
-                            href='{{ grandchild.url }}'
-                            {% if grandchild.current %}
-                              aria-current='page'
-                            {% endif %}
-                          >
-                            {{- grandchild.title | escape -}}
-                          </a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-                </li>
-              {% endfor %}
+                  </li>
+                {% endfor %}
+              {% else %}
+                <li><a href='{{ routes.all_products_collection_url }}'>All shoes</a></li>
+                <li><a href='{{ routes.collections_url }}/casual'>Casual</a></li>
+                <li><a href='{{ routes.collections_url }}/lifestyle'>Lifestyle</a></li>
+                <li><a href='{{ routes.collections_url }}/performance'>Performance</a></li>
+                <li><a href='{{ routes.collections_url }}/formal'>Formal</a></li>
+              {% endif %}
             </ul>
           </div>
         </details>

@@ -3,6 +3,32 @@
     <input type='hidden' name='q' value='{{ search.terms | escape }}'
     ><input type='hidden' name='options[prefix]' value='last'>
   {%- endif %}
+  {% if request.page_type == 'collection' %}
+    <nav class='category-filter' aria-label='Shop by category'>
+      <span class='category-filter__label'>Category</span>
+      <ul role='list'>
+        <li>
+          <a
+            href='{{ routes.all_products_collection_url }}'
+            {% if collection.handle == 'all' %}
+              aria-current='page'
+            {% endif %}
+          >All shoes</a>
+        </li>
+        {% assign category_handles = 'casual,lifestyle,performance,formal' | split: ',' %}
+        {% for category_handle in category_handles %}
+          <li>
+            <a
+              href='{{ routes.collections_url }}/{{ category_handle }}'
+              {% if collection.handle == category_handle %}
+                aria-current='page'
+              {% endif %}
+            >{{ category_handle | capitalize }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
   <div class='filter-row'>
     {% for filter in results.filters %}
       <details>
