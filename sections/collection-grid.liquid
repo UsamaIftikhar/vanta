@@ -11,24 +11,25 @@
       <div class='rte'>{{ section.settings.text }}</div>
     </div>
     <div class='collection-grid'>
+      {% assign demo_kinds = 'category-casual,category-lifestyle,category-performance,category-formal' | split: ',' %}
       {% for block in section.blocks %}
         <article {{ block.shopify_attributes }} data-animate>
           <a href='{{ block.settings.collection.url | default: routes.all_products_collection_url }}'>
             {% liquid
               assign collection_image = block.settings.image
-              assign collection_handle = block.settings.collection.handle
-              assign demo_kind = 'category-' | append: collection_handle
+              assign demo_index = forloop.index0 | modulo: demo_kinds.size
+              assign demo_kind = demo_kinds[demo_index]
             %}
             {% if collection_image != blank %}
               {%- render 'image', image: collection_image -%}
-            {% elsif collection_handle == 'casual' or collection_handle == 'lifestyle' or collection_handle == 'performance' or collection_handle == 'formal' %}
-              {%- render 'demo-image', kind: demo_kind -%}
+            {% elsif block.settings.collection.featured_image != blank %}
+              {%- render 'image', image: block.settings.collection.featured_image -%}
             {% else %}
-              {%- render 'image', image: block.settings.collection.image, demo: 'editorial' -%}
+              {%- render 'demo-image', kind: demo_kind -%}
             {% endif %}
             <div class='collection-card-title'>
               <h3>
-                {{ block.settings.heading | default: block.settings.collection.title | escape }}
+                {{ block.settings.heading | default: block.settings.collection.title | default: 'Explore' | escape }}
               </h3>
               <span aria-hidden='true'>↗</span>
             </div>

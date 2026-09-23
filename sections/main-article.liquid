@@ -36,25 +36,24 @@
         {%- if form.posted_successfully? %}
           <p role='status'>{{ 'general.contact_success' | t }}</p>
         {% endif -%}
-        <label>
-          {{- 'general.name' | t -}}
+        <label for='CommentAuthor-{{ section.id }}'>{{ 'general.name' | t }}</label>
           <input
+            id='CommentAuthor-{{ section.id }}'
             name='comment[author]'
             autocomplete='name'
             value='{{ form.author | escape }}'
-            required></label
-        ><label>
-          {{- 'general.email' | t -}}
+            required>
+        <label for='CommentEmail-{{ section.id }}'>{{ 'general.email' | t }}</label>
           <input
+            id='CommentEmail-{{ section.id }}'
             name='comment[email]'
             type='email'
             autocomplete='email'
             value='{{ form.email | escape }}'
-            required></label
-        ><label>
-          {{- 'general.message' | t -}}
-          <textarea name='comment[body]' required>{{ form.body | escape }}</textarea></label
-        ><button class='button'>{{ 'general.post_comment' | t }}</button>
+            required>
+        <label for='CommentBody-{{ section.id }}'>{{ 'general.message' | t }}</label>
+          <textarea id='CommentBody-{{ section.id }}' name='comment[body]' required>{{ form.body | escape }}</textarea>
+        <button class='button'>{{ 'general.post_comment' | t }}</button>
       {% endform %}
     {% endif %}
   </div>

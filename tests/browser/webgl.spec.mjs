@@ -129,3 +129,79 @@ test('scene removal during a slow request leaves no canvas or uncaught error', a
   expect(errors).toEqual([]);
   await expect(page.locator('canvas')).toHaveCount(0);
 });
+
+test('section reload discovers a model scene after a poster-only scene', async ({ page }) => {
+  await page.route('**/vanta-fixture.glb', (route) =>
+    route.fulfill({ contentType: 'model/gltf-binary', body: triangleGLB() }),
+  );
+  await page.goto('/');
+  const section = page.locator('.immersive-hero');
+  await section.evaluate((host) => {
+    const posterOnly = document.createElement('product-scene');
+    const modeled = document.createElement('product-scene');
+    modeled.dataset.model = '/vanta-fixture.glb';
+    modeled.dataset.mobile = 'interactive';
+    modeled.innerHTML =
+      '<div class="scene-poster">Poster</div><div class="scene-canvas"></div><button data-scene-enable>Explore</button><div class="scene-controls" hidden></div><p class="scene-status" data-failure="Unavailable"></p>';
+    host.replaceChildren(posterOnly, modeled);
+    document.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true }));
+  });
+  const modeled = section.locator('product-scene[data-model]');
+  await expect.poll(() => modeled.evaluate((node) => customElements.get(node.localName) != null)).toBeTruthy();
+  await modeled.evaluate((node) => node.initialize(true));
+  await expect(modeled).toHaveClass(/scene-ready/);
+  await expect(modeled.locator('canvas')).toHaveCount(1);
+});
+
+test('data-saver policy keeps 3D poster-only until explicit activation', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'connection', {
+      configurable: true,
+      value: { saveData: true, effectiveType: '4g' },
+    });
+  });
+  let modelRequests = 0;
+  await page.route('**/vanta-fixture.glb', (route) => {
+    modelRequests++;
+    return route.fulfill({ contentType: 'model/gltf-binary', body: triangleGLB() });
+  });
+  await page.goto('/');
+  await page.evaluate(async () => {
+    const themeScript = [...document.scripts].find((script) => script.src.includes('/theme.js'));
+    await import(new URL('three-loader.js', themeScript.src).href);
+    const scene = document.createElement('product-scene');
+    scene.dataset.model = '/vanta-fixture.glb';
+    scene.dataset.mobile = 'interactive';
+    scene.innerHTML =
+      '<div class="scene-poster">Accessible product poster</div><div class="scene-canvas"></div><button data-scene-enable>Explore in 3D</button><div class="scene-controls" hidden></div><p class="scene-status"></p>';
+    document.querySelector('main').prepend(scene);
+  });
+  const scene = page.locator('product-scene').first();
+  await page.waitForTimeout(500);
+  expect(modelRequests).toBe(0);
+  await expect(scene.locator('.scene-poster')).toBeVisible();
+  await expect(scene.locator('[data-scene-enable]')).toBeVisible();
+});
+
+test('reduced-motion poster policy does not request the 3D runtime', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  let modelRequests = 0;
+  await page.route('**/vanta-fixture.glb', (route) => {
+    modelRequests++;
+    return route.fulfill({ contentType: 'model/gltf-binary', body: triangleGLB() });
+  });
+  await page.goto('/');
+  await page.evaluate(async () => {
+    const themeScript = [...document.scripts].find((script) => script.src.includes('/theme.js'));
+    await import(new URL('three-loader.js', themeScript.src).href);
+    const scene = document.createElement('product-scene');
+    scene.dataset.model = '/vanta-fixture.glb';
+    scene.dataset.reduced = 'poster';
+    scene.innerHTML =
+      '<div class="scene-poster">Accessible product poster</div><div class="scene-canvas"></div><button data-scene-enable>Explore in 3D</button><div class="scene-controls" hidden></div><p class="scene-status"></p>';
+    document.querySelector('main').prepend(scene);
+  });
+  await page.waitForTimeout(500);
+  expect(modelRequests).toBe(0);
+  await expect(page.locator('product-scene').first().locator('.scene-poster')).toBeVisible();
+});

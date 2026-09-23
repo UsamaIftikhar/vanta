@@ -3,78 +3,78 @@
     "page": "home",
     "mode": "mobile",
     "scores": {
-      "performance": 73,
+      "performance": 85,
       "accessibility": 100,
       "best-practices": 54,
       "seo": 100
     },
-    "LCP": 5400.7182999999995,
-    "CLS": 0.0003819507369086687,
-    "TBT": 215.5
+    "LCP": 2551.9611,
+    "CLS": 0.0003525699109926172,
+    "TBT": 352.00000000000045
   },
   {
     "page": "collection",
     "mode": "mobile",
+    "scores": {
+      "performance": 84,
+      "accessibility": 100,
+      "best-practices": 54,
+      "seo": 100
+    },
+    "LCP": 2822.513,
+    "CLS": 0,
+    "TBT": 283
+  },
+  {
+    "page": "product",
+    "mode": "mobile",
+    "scores": {
+      "performance": 82,
+      "accessibility": 100,
+      "best-practices": 77,
+      "seo": 100
+    },
+    "LCP": 3178.4346000000005,
+    "CLS": 0,
+    "TBT": 258.5
+  },
+  {
+    "page": "home",
+    "mode": "desktop",
+    "scores": {
+      "performance": 71,
+      "accessibility": 100,
+      "best-practices": 54,
+      "seo": 100
+    },
+    "LCP": 5349.9704,
+    "CLS": 0,
+    "TBT": 241.9999999999991
+  },
+  {
+    "page": "collection",
+    "mode": "desktop",
     "scores": {
       "performance": 83,
       "accessibility": 100,
       "best-practices": 54,
       "seo": 100
     },
-    "LCP": 4219.533600000001,
+    "LCP": 2943.8395000000005,
     "CLS": 0,
-    "TBT": 11.5
-  },
-  {
-    "page": "product",
-    "mode": "mobile",
-    "scores": {
-      "performance": 90,
-      "accessibility": 100,
-      "best-practices": 77,
-      "seo": 100
-    },
-    "LCP": 3424.6428999999994,
-    "CLS": 0,
-    "TBT": 24.5
-  },
-  {
-    "page": "home",
-    "mode": "desktop",
-    "scores": {
-      "performance": 87,
-      "accessibility": 100,
-      "best-practices": 54,
-      "seo": 100
-    },
-    "LCP": 3679.813,
-    "CLS": 0,
-    "TBT": 16
-  },
-  {
-    "page": "collection",
-    "mode": "desktop",
-    "scores": {
-      "performance": 90,
-      "accessibility": 100,
-      "best-practices": 54,
-      "seo": 100
-    },
-    "LCP": 2470.3367,
-    "CLS": 0,
-    "TBT": 41.5
+    "TBT": 286.5
   },
   {
     "page": "product",
     "mode": "desktop",
     "scores": {
-      "performance": 88,
+      "performance": 65,
       "accessibility": 100,
       "best-practices": 77,
       "seo": 100
     },
-    "LCP": 3627.522900000001,
+    "LCP": 5020.126200000001,
     "CLS": 0,
-    "TBT": 76
+    "TBT": 480.0000000000009
   }
 ]

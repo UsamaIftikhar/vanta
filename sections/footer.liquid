@@ -15,40 +15,55 @@
         {{- settings.brand_label | default: shop.name | escape -}}
       </a>
       <p>{{ section.settings.text | escape }}</p>
-      {%- assign instagram_url = settings.instagram | default: 'https://www.instagram.com/' -%}
-      {%- assign facebook_url = settings.facebook | default: 'https://www.facebook.com/' -%}
-      {%- assign tiktok_url = settings.tiktok | default: 'https://www.tiktok.com/' -%}
-      <div class='footer-socials' aria-label='Social media'>
-        <a href='{{ instagram_url }}' target='_blank' rel='noopener noreferrer'>
-          <span>Instagram</span><span aria-hidden='true'>↗</span>
-        </a>
-        <a href='{{ facebook_url }}' target='_blank' rel='noopener noreferrer'>
-          <span>Facebook</span><span aria-hidden='true'>↗</span>
-        </a>
-        <a href='{{ tiktok_url }}' target='_blank' rel='noopener noreferrer'>
-          <span>TikTok</span><span aria-hidden='true'>↗</span>
-        </a>
-      </div>
+      {% if settings.instagram != blank or settings.facebook != blank or settings.tiktok != blank or settings.youtube != blank %}
+        <div class='footer-socials' aria-label='Social media'>
+          {% if settings.instagram != blank %}
+            <a href='{{ settings.instagram }}' target='_blank' rel='noopener noreferrer'>
+              {% render 'social-icon', name: 'instagram' %}<span>Instagram</span>
+            </a>
+          {% endif %}
+          {% if settings.facebook != blank %}
+            <a href='{{ settings.facebook }}' target='_blank' rel='noopener noreferrer'>
+              {% render 'social-icon', name: 'facebook' %}<span>Facebook</span>
+            </a>
+          {% endif %}
+          {% if settings.tiktok != blank %}
+            <a href='{{ settings.tiktok }}' target='_blank' rel='noopener noreferrer'>
+              {% render 'social-icon', name: 'tiktok' %}<span>TikTok</span>
+            </a>
+          {% endif %}
+          {% if settings.youtube != blank %}
+            <a href='{{ settings.youtube }}' target='_blank' rel='noopener noreferrer'>
+              {% render 'social-icon', name: 'youtube' %}<span>YouTube</span>
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
 
     <nav class='footer-nav' aria-label='Shop'>
       <h2 class='eyebrow'>Shop</h2>
       <ul role='list'>
         <li><a href='{{ routes.all_products_collection_url }}'>All shoes</a></li>
-        <li><a href='{{ routes.collections_url }}/casual'>Casual</a></li>
-        <li><a href='{{ routes.collections_url }}/lifestyle'>Lifestyle</a></li>
-        <li><a href='{{ routes.collections_url }}/performance'>Performance</a></li>
-        <li><a href='{{ routes.collections_url }}/formal'>Formal</a></li>
+        {% for collection in collections limit: 4 %}
+          {% unless collection.handle == 'all' or collection.handle == 'frontpage' %}
+            <li><a href='{{ collection.url }}'>{{ collection.title | escape }}</a></li>
+          {% endunless %}
+        {% endfor %}
       </ul>
     </nav>
 
     <nav class='footer-nav' aria-label='Help and information'>
       <h2 class='eyebrow'>Help</h2>
       <ul role='list'>
-        <li><a href='/pages/contact'>Contact</a></li>
+        {% if pages.contact != blank %}<li><a href='{{ pages.contact.url }}'>Contact</a></li>{% endif %}
         <li><a href='{{ routes.search_url }}'>Search</a></li>
-        <li><a href='/blogs/news'>Journal</a></li>
-        <li><a href='{{ routes.account_url }}'>Account</a></li>
+        {% for blog_entry in blogs limit: 1 %}
+          <li><a href='{{ blog_entry.url }}'>{{ blog_entry.title | escape }}</a></li>
+        {% endfor %}
+        {% if shop.customer_accounts_enabled %}
+          <li><a href='{{ routes.account_url }}'>Account</a></li>
+        {% endif %}
         <li><a href='{{ routes.cart_url }}'>Your bag</a></li>
       </ul>
     </nav>
@@ -134,7 +149,8 @@
         {
           "type": "link_list",
           "id": "menu",
-          "label": "Menu"
+          "label": "Footer menu",
+          "default": "footer"
         }
       ]
     }

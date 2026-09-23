@@ -34,13 +34,18 @@ test('contact browser validation and newsletter validation do not send messages'
     await newsletter.locator('input[type=email]').evaluate((e) => e.validity.valueMissing),
   ).toBeTruthy();
 });
-test('without JavaScript, product options and native cart forms remain available', async ({
+test('without JavaScript, product options and native add-to-cart remain functional', async ({
   browser,
   baseURL,
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto(baseURL + '/products/the-complete-snowboard');
+  const catalog = await context.request
+    .get(baseURL + '/products.json?limit=250')
+    .then((response) => response.json());
+  const product = catalog.products?.find((item) => item.variants.some((variant) => variant.available));
+  test.skip(!product, 'Store requires a purchasable test product');
+  await page.goto(baseURL + `/products/${product.handle}`);
   await expect(page.locator('.purchase-button')).toBeEnabled();
   const choice = page.locator('[data-option-link]:not(.selected)').first();
   if (await choice.count()) {
@@ -48,10 +53,35 @@ test('without JavaScript, product options and native cart forms remain available
     await expect(page).toHaveURL(/option_values=/);
   }
   await expect(page.locator('product-form form')).toHaveAttribute('action', /cart\/add/);
+  await page.locator('.purchase-button').press('Enter');
+  await page.waitForURL(/\/cart(?:\?|$)/);
+  await expect(page.locator('.cart-line')).not.toHaveCount(0);
+  await context.close();
+});
+
+test('without JavaScript, mobile navigation remains usable', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({
+    javaScriptEnabled: false,
+    viewport: { width: 390, height: 844 },
+  });
+  const page = await context.newPage();
+  await page.goto(baseURL + '/');
+  const menu = page.locator('.mobile-menu');
+  await menu.locator(':scope > summary').click();
+  await expect(menu).toHaveAttribute('open', '');
+  const catalog = menu.locator('details').filter({ hasText: 'Catalog' }).first();
+  if (await catalog.count()) {
+    await catalog.locator('summary').click();
+    await expect(catalog).toHaveAttribute('open', '');
+  }
+  await expect(menu.locator('a[href="/collections/all"]').first()).toBeVisible();
   await context.close();
 });
 test('editor-style product section reload does not duplicate add requests', async ({ page }) => {
-  await page.goto('/products/the-complete-snowboard');
+  const catalog = await page.request.get('/products.json?limit=250').then((response) => response.json());
+  const product = catalog.products?.find((item) => item.variants.some((variant) => variant.available));
+  test.skip(!product, 'Store requires a purchasable test product');
+  await page.goto(`/products/${product.handle}`);
   await page.locator('product-detail').evaluate((el) => {
     for (let i = 0; i < 3; i++) {
       const clone = el.cloneNode(true);

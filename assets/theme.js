@@ -23,8 +23,10 @@ const initialize = (scope = document) => {
     document.body.dataset.cursor === 'true'
   )
     import('./motion.js').then(({ initializeMotion }) => initializeMotion(scope)).catch(() => {});
-  const scene = scope.querySelector('product-scene');
-  if (scene?.dataset.model) import('./three-loader.js').catch(() => {});
+  const hasModelScene = [...scope.querySelectorAll('product-scene')].some(
+    (scene) => scene.dataset.model,
+  );
+  if (hasModelScene) import('./three-loader.js').catch(() => {});
 };
 initialize();
 document.addEventListener('shopify:section:load', (event) => initialize(event.target));

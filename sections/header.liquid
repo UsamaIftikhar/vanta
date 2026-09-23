@@ -9,6 +9,13 @@
         <nav aria-label='{{ 'general.menu' | t }}'>
           {% render 'menu', menu: section.settings.menu %}
         </nav>
+        {% if shop.customer_accounts_enabled -%}
+          <div class='mobile-account'>
+            <shopify-account>
+              <a href='{{ routes.account_url }}'>{{ 'general.account' | t }}</a>
+            </shopify-account>
+          </div>
+        {%- endif %}
         {% render 'localization', id: 'MobileLocalization' %}
       </div>
     </details>
@@ -72,7 +79,7 @@
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Navigation",
+      "label": "Main menu",
       "default": "main-menu"
     },
     {
@@ -98,7 +105,7 @@
     {
       "type": "checkbox",
       "id": "transparent",
-      "label": "Overlay on homepage",
+      "label": "Overlay on home page",
       "default": false
     },
     {
@@ -125,7 +132,7 @@
   "blocks": [
     {
       "type": "promotion",
-      "name": "Menu promotion",
+      "name": "Main menu promotion",
       "limit": 1,
       "settings": [
         {

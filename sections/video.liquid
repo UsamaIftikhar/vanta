@@ -19,7 +19,7 @@
       {%- elsif section.settings.external -%}
         {%- if section.settings.external.type == 'youtube' -%}
           <iframe
-            src='https://www.youtube-nocookie.com/embed/{{ section.settings.external.id }}'
+            src='//www.youtube-nocookie.com/embed/{{ section.settings.external.id }}'
             title='{{ section.settings.heading | escape }}'
             loading='lazy'
             allow='fullscreen'
@@ -27,7 +27,7 @@
           ></iframe>
         {%- else -%}
           <iframe
-            src='https://player.vimeo.com/video/{{ section.settings.external.id }}'
+            src='//player.vimeo.com/video/{{ section.settings.external.id }}'
             title='{{ section.settings.heading | escape }}'
             loading='lazy'
             allow='fullscreen'

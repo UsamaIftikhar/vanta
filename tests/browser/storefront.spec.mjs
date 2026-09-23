@@ -27,10 +27,28 @@ test('home, reduced motion, navigation and empty cart dialog', async ({ page }, 
   if (page.viewportSize().width < 990) {
     await page.locator('.mobile-menu>summary').click();
     await expect(page.locator('.mobile-menu')).toHaveAttribute('open', '');
+    await expect(page.locator('.mobile-menu-panel shopify-account')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(page.locator('.mobile-menu')).not.toHaveAttribute('open');
   }
-  expect(errors).toEqual([]);
+  const relevantErrors = errors.filter(
+    (message) =>
+      !(
+        // Shopify injects an HTTP origin-trials URL into the local proxy; WebKit rejects its
+        // CDN HTTPS redirect before theme code runs. The hosted HTTPS preview is unaffected.
+        info.project.name === 'webkit' &&
+        message === 'Cross-origin script load denied by Cross-Origin Resource Sharing policy.'
+      ),
+  );
+  expect(relevantErrors).toEqual([]);
+});
+
+test('desktop and mobile headers expose the Shopify account component', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.header-actions shopify-account')).toBeAttached();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator('.mobile-menu>summary').click();
+  await expect(page.locator('.mobile-menu-panel shopify-account')).toBeVisible();
 });
 test('home and collection have no serious accessibility violations', async ({ page }) => {
   for (const path of ['/', '/collections/all']) {

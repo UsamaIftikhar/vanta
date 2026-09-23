@@ -23,9 +23,11 @@ test('default hero renders dimensional image motion without loading WebGL', asyn
   await expect(page.locator('#VantaProducts')).toBeInViewport();
 });
 
-test('four demo silhouettes use distinct product photos', async ({ page }) => {
+test('featured silhouettes use four distinct product photos', async ({ page }) => {
   await page.goto('/');
-  const images = page.locator('[id^="VantaProducts-"] .product-card > img');
+  const images = page.locator(
+    '[id^="VantaProducts-"] .product-card .card-media > img:not(.card-secondary)',
+  );
   await expect(images).toHaveCount(4);
   const sources = await images.evaluateAll((nodes) =>
     nodes.map((node) => node.getAttribute('src')),

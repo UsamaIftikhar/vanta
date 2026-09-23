@@ -3,10 +3,12 @@ import { launch } from 'chrome-launcher';
 import { chromium } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 const base = process.env.THEME_BASE_URL || 'http://127.0.0.1:9292';
+const productPath = process.env.THEME_PRODUCT_PATH;
+if (!productPath) throw new Error('Set THEME_PRODUCT_PATH to a populated product URL path.');
 const paths = [
   '/',
   '/collections/all',
-  process.env.THEME_PRODUCT_PATH || '/products/the-complete-snowboard',
+  productPath,
 ];
 await mkdir('docs/qa/lighthouse', { recursive: true });
 const chrome = await launch({

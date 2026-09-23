@@ -10,6 +10,6 @@
 | Exploded model | GLB with independent `explode_` meshes | Same budgets | Exploded product section |
 | Logos | Transparent SVG/PNG | <30 KB each | Only authorized press/brand identities |
 
-Original AI-generated fictional VANTA campaign and editorial assets are included under assets/vanta-*.jpg. Source PNGs and prompt provenance are in docs/assets and docs/ASSET_PROVENANCE.md. They are demo concepts, not photographs of a real purchasable product. Theme Settings → Brand lets merchants turn off demo imagery. Real product records always use their own Shopify media.
+Original AI-generated fictional VANTA campaign and editorial assets are included under `assets/vanta-*.webp`. Source PNGs and prompt provenance are in `docs/assets` and `docs/ASSET_PROVENANCE.md`. They are demo concepts, not photographs of a real purchasable product. Theme Settings → Brand lets merchants turn off demo imagery. Real product records always use their own Shopify media.
 
 A complete original sneaker catalog, consistent views/colorways, prepared GLB, truthful technical specifications, video and genuine testimonials/press permissions are still needed for a submission-quality demo. Do not infer product claims from generated imagery. Empty optional sections are disabled in the default home page until content exists.

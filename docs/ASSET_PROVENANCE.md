@@ -4,7 +4,7 @@ Generated with the built-in image_gen tool on 2026-09-23; no external reference 
 
 ## Campaign
 
-Files: docs/assets/vanta-campaign-original.png; assets/vanta-campaign.jpg; assets/vanta-campaign-small.jpg.
+Files: `docs/assets/vanta-campaign-original.png`; `assets/vanta-campaign.webp`; `assets/vanta-campaign-small.webp`.
 
 Prompt:
 
@@ -12,7 +12,7 @@ Use case: product-mockup. Asset type: premium original fictional VANTA Athletics
 
 ## Editorial
 
-Files: docs/assets/vanta-editorial-original.png; assets/vanta-editorial.jpg; assets/vanta-editorial-small.jpg.
+Files: `docs/assets/vanta-editorial-original.png`; `assets/vanta-editorial.webp`; `assets/vanta-editorial-small.webp`.
 
 Prompt:
 
@@ -20,7 +20,7 @@ Use case: ads-marketing. Asset type: editorial lookbook image for original ficti
 
 ## Additional product photos — 2026-09-23
 
-Built-in image_gen, no reference assets. Files: `assets/vanta-flux.jpg`, `assets/vanta-aero.jpg`, `assets/vanta-terra.jpg` plus 600px `-small.jpg` versions. Original generated PNGs are in docs/assets. These are fictional product concepts, used in empty demo sections, not replacements for unrelated catalog product media.
+Built-in image_gen, no reference assets. Files: `assets/vanta-flux.webp`, `assets/vanta-aero.webp`, `assets/vanta-terra.webp` plus 600px `-small.webp` versions. Original generated PNGs are in `docs/assets`. These are fictional product concepts, used in empty demo sections, not replacements for unrelated catalog product media.
 
 Flux prompt: Use case: product-mockup. Create a premium photorealistic catalog photograph of one completely original fictional VANTA Flux running sneaker. Square composition, entire shoe visible in a three-quarter lateral view, toe pointing left, heel right. Graphite black technical knit upper, sculpted charcoal foam sole with carved layered ribs, ivory thin piping and muted electric lime lace eyelet and heel tab. Small abstract V shaped stitch mark. Shoe resting on neutral cool gray seamless studio backdrop, soft studio shadows, beautifully resolved rubber, woven textile and laces. Product dominates with 12 percent breathing room around edges. Luxury sneaker campaign quality. No text, no watermark, no commercial brand logos or recognizable famous shoe designs.
 
@@ -36,7 +36,7 @@ Hero cutout prompt: Use case: product-mockup. Asset type: premium Shopify sneake
 
 Movement prompt: Use case: ads-marketing. Asset type: wide editorial campaign image. Create an original cinematic VANTA Athletics urban movement photograph with an anonymous runner in charcoal technical clothing and pearl-white/acid-lime footwear moving through monumental concrete architecture. Wide landscape framing, full body in the right third, architectural negative space on the left, both shoes fully visible, early-morning directional light, no text, watermark or recognizable brand marks.
 
-`assets/vanta-motion-portrait.jpg` and its small variant are deterministic 4:5 delivery crops of the same movement source. The crop was positioned around the right-hand subject so the complete athlete and both shoes remain in frame; it is used where a portrait container would otherwise destroy the landscape composition.
+`assets/vanta-motion-portrait.webp` and its small variant are deterministic 4:5 delivery crops of the same movement source. The crop was positioned around the right-hand subject so the complete athlete and both shoes remain in frame; it is used where a portrait container would otherwise destroy the landscape composition.
 
 Technology prompt: Use case: product-mockup. Asset type: premium ecommerce technology-detail image. Create an original macro editorial photograph of a fictional VANTA sneaker showing engineered knit, sculpted foam, carbon-like support plate and acid-lime thread. Landscape detail composition, deliberate heel/midsole crop, dramatic raking light on near-black, plausible construction, no text, watermark or recognizable brand marks.
 

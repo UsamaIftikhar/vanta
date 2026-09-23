@@ -1,9 +1,8 @@
 <ul class='menu-list'>
   {% for link in menu.links %}
     {% liquid
-      assign link_title = link.title | downcase
       assign is_catalog = false
-      if link_title == 'catalog'
+      if link.url == routes.all_products_collection_url or link.url == routes.collections_url
         assign is_catalog = true
       endif
     %}
@@ -52,10 +51,11 @@
                 {% endfor %}
               {% else %}
                 <li><a href='{{ routes.all_products_collection_url }}'>All shoes</a></li>
-                <li><a href='{{ routes.collections_url }}/casual'>Casual</a></li>
-                <li><a href='{{ routes.collections_url }}/lifestyle'>Lifestyle</a></li>
-                <li><a href='{{ routes.collections_url }}/performance'>Performance</a></li>
-                <li><a href='{{ routes.collections_url }}/formal'>Formal</a></li>
+                {% for collection in collections limit: 6 %}
+                  {% unless collection.handle == 'all' or collection.handle == 'frontpage' %}
+                    <li><a href='{{ collection.url }}'>{{ collection.title | escape }}</a></li>
+                  {% endunless %}
+                {% endfor %}
               {% endif %}
             </ul>
           </div>

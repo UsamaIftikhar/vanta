@@ -58,8 +58,9 @@
             {%- endif %}
           </details>
         {% endfor %}
-        {% if section.settings.button_link != blank %}
-          <a class='button hotspot-cta' href='{{ section.settings.button_link }}'>
+        {% assign hotspot_button_link = section.settings.button_link | default: routes.all_products_collection_url %}
+        {% if section.settings.button_label != blank %}
+          <a class='button hotspot-cta' href='{{ hotspot_button_link }}'>
             {{- section.settings.button_label | escape }} ↗</a
           >
         {% endif %}
@@ -111,7 +112,7 @@
       "type": "text",
       "id": "button_label",
       "label": "Button label",
-      "default": "Explore the X1"
+      "default": "Shop products"
     },
     {
       "type": "url",
@@ -159,7 +160,7 @@
     {
       "type": "checkbox",
       "id": "demo_model",
-      "label": "Use bundled VANTA concept model",
+      "label": "Enable bundled VANTA concept model",
       "default": false,
       "info": "An original stylized demo sneaker. A model URL overrides it."
     },

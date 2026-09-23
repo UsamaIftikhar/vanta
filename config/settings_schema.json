@@ -4,8 +4,8 @@
     "theme_name": "VANTA",
     "theme_version": "0.1.0",
     "theme_author": "VANTA",
-    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
-    "theme_support_url": "https://help.shopify.com/"
+    "theme_documentation_url": "https://github.com/UsamaIftikhar/vanta/blob/main/docs/MERCHANT_GUIDE.md",
+    "theme_support_url": "https://github.com/UsamaIftikhar/vanta/issues/new"
   },
   {
     "name": "Colors",

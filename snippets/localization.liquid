@@ -1,8 +1,7 @@
 {% form 'localization', id: id, class: 'localization' %}
   {% if localization.available_countries.size > 1 -%}
-    <label>
-      {{- 'general.country' | t -}}
-      <select name='country_code'>
+    <label for='Country-{{ id }}'>{{ 'general.country' | t }}</label>
+      <select id='Country-{{ id }}' name='country_code'>
         {% for country in localization.available_countries %}
           <option
             value='{{ country.iso_code }}'
@@ -13,13 +12,11 @@
             {{ country.name | escape }} ({{ country.currency.iso_code }})
           </option>
         {% endfor %}
-      </select></label
-    >
+      </select>
   {%- endif %}
   {% if localization.available_languages.size > 1 -%}
-    <label>
-      {{- 'general.language' | t -}}
-      <select name='locale_code'>
+    <label for='Language-{{ id }}'>{{ 'general.language' | t }}</label>
+      <select id='Language-{{ id }}' name='locale_code'>
         {% for language in localization.available_languages %}
           <option
             value='{{ language.iso_code }}'
@@ -30,8 +27,7 @@
             {{ language.endonym_name | escape }}
           </option>
         {% endfor %}
-      </select></label
-    >
+      </select>
   {%- endif %}
   {% if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
     <button type='submit'>{{ 'general.save' | t }}</button>

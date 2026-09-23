@@ -5,11 +5,7 @@
       <h1 class='display'>{{ collection.title | escape }}</h1>
       <div class='rte'>{{ collection.description }}</div>
     </div>
-    {% assign category_handles = 'casual,lifestyle,performance,formal' | split: ',' %}
-    {% if category_handles contains collection.handle %}
-      {% assign category_demo = 'category-' | append: collection.handle %}
-      {% render 'demo-image', kind: category_demo, eager: true %}
-    {% elsif collection.image %}
+    {% if collection.image %}
       {% render 'image', image: collection.image, eager: true %}
     {% endif %}
   </div>

@@ -19,7 +19,7 @@ const products = [
     handle: 'vanta-aero',
     price: 160,
     color: 'Ice / Cobalt',
-    image: 'vanta-aero.jpg',
+    image: 'vanta-aero.webp',
     description:
       '<p>VANTA Aero brings a lighter visual language to everyday movement with an airy knit upper, confident cushioning, and a cool blue finish.</p><p>Clean, responsive, and easy to wear.</p>',
   },
@@ -28,7 +28,7 @@ const products = [
     handle: 'vanta-flux',
     price: 170,
     color: 'Black / Volt',
-    image: 'vanta-flux.jpg',
+    image: 'vanta-flux.webp',
     description:
       '<p>VANTA Flux is a monochrome performance silhouette punctuated with high-visibility accents and a grounded, flowing sole geometry.</p><p>Made for motion after dark.</p>',
   },
@@ -37,7 +37,7 @@ const products = [
     handle: 'vanta-terra',
     price: 175,
     color: 'Sand / Clay',
-    image: 'vanta-terra.jpg',
+    image: 'vanta-terra.webp',
     description:
       '<p>VANTA Terra balances a warm neutral palette with an everyday technical shape, breathable texture, and a supportive sculpted platform.</p><p>Built to move naturally across the city.</p>',
   },

@@ -55,16 +55,16 @@
                 {{ discount.discount_application.title | escape }} (−{{ discount.amount | money }})
               </p>
             {% endfor -%}
-            <label class='quantity-label'>
-              {{- 'general.quantity' | t -}}
+            <label class='quantity-label' for='CartQuantity-{{ item.key | handle }}{% if drawer %}-Drawer{% endif %}'>{{ 'general.quantity' | t }}</label>
               <input
+                id='CartQuantity-{{ item.key | handle }}{% if drawer %}-Drawer{% endif %}'
                 type='number'
                 name='updates[]'
                 value='{{ item.quantity }}'
                 min='0'
                 step='{{ item.variant.quantity_rule.increment | default: 1 }}'
-                data-line-key='{{ item.key | escape }}'></label
-            ><a href='{{ item.url_to_remove }}' data-remove-key='{{ item.key | escape }}'>
+                data-line-key='{{ item.key | escape }}'>
+            <a href='{{ item.url_to_remove }}' data-remove-key='{{ item.key | escape }}'>
               {{- 'general.remove' | t -}}
             </a>
           </div>
@@ -73,10 +73,8 @@
       {% endfor %}
     </div>
     <div class='cart-summary'>
-      <label>
-        {{- 'general.note' | t -}}
-        <textarea name='note'>{{ cart.note | escape }}</textarea>
-      </label>
+      <label for='CartNote{% if drawer %}-Drawer{% endif %}'>{{ 'general.note' | t }}</label>
+      <textarea id='CartNote{% if drawer %}-Drawer{% endif %}' name='note'>{{ cart.note | escape }}</textarea>
       {%- for discount in cart.cart_level_discount_applications %}
         <p>{{ discount.title | escape }} −{{ discount.total_allocated_amount | money }}</p>
       {% endfor %}

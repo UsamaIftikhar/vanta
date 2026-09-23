@@ -96,7 +96,7 @@ test('translations resolve and no full variant payload is serialized', async () 
 test('Three runtime is reachable only from optional scene imports', async () => {
   const global = await readFile('assets/theme.js', 'utf8');
   assert.doesNotMatch(global, /import .* from ['"].*three/);
-  assert.match(global, /querySelector\('product-scene'\)/);
+  assert.match(global, /querySelectorAll\('product-scene'\)/);
   const runtime = await readFile('assets/three-runtime.js');
   assert.ok(runtime.length < 900_000);
 });

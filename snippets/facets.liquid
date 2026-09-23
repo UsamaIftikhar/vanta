@@ -15,16 +15,17 @@
             {% endif %}
           >All shoes</a>
         </li>
-        {% assign category_handles = 'casual,lifestyle,performance,formal' | split: ',' %}
-        {% for category_handle in category_handles %}
-          <li>
-            <a
-              href='{{ routes.collections_url }}/{{ category_handle }}'
-              {% if collection.handle == category_handle %}
-                aria-current='page'
-              {% endif %}
-            >{{ category_handle | capitalize }}</a>
-          </li>
+        {% for category in collections limit: 8 %}
+          {% unless category.handle == 'all' or category.handle == 'frontpage' %}
+            <li>
+              <a
+                href='{{ category.url }}'
+                {% if collection.handle == category.handle %}
+                  aria-current='page'
+                {% endif %}
+              >{{ category.title | escape }}</a>
+            </li>
+          {% endunless %}
         {% endfor %}
       </ul>
     </nav>
@@ -40,8 +41,10 @@
           {% case filter.type -%}
             {%- when 'boolean', 'list' -%}
               {%- for value in filter.values -%}
-                <label class='check-label'
-                  ><input
+                {%- assign filter_id = 'Filter-' | append: filter.param_name | handle | append: '-' | append: forloop.index -%}
+                <label class='check-label' for='{{ filter_id }}'>
+                  <input
+                    id='{{ filter_id }}'
                     type='checkbox'
                     name='{{ value.param_name }}'
                     value='{{ value.value | escape }}'
@@ -55,9 +58,13 @@
                 >
               {%- endfor -%}
             {%- when 'price_range' -%}
-              <label>
+              {%- assign minimum_id = 'Filter-' | append: filter.min_value.param_name | handle -%}
+              {%- assign maximum_id = 'Filter-' | append: filter.max_value.param_name | handle -%}
+              <label for='{{ minimum_id }}'>
                 {{- filter.min_value.param_name | split: '.' | last -}}
-                <input
+              </label>
+              <input
+                  id='{{ minimum_id }}'
                   type='number'
                   name='{{ filter.min_value.param_name }}'
                   min='0'
@@ -65,10 +72,12 @@
                   {% if filter.min_value.value %}
                     value='{{ filter.min_value.value | divided_by: 100.0 }}'
                   {% endif %}
-                  placeholder='0'></label
-              ><label>
+                  placeholder='0'>
+              <label for='{{ maximum_id }}'>
                 {{- filter.max_value.param_name | split: '.' | last -}}
-                <input
+              </label>
+              <input
+                  id='{{ maximum_id }}'
                   type='number'
                   name='{{ filter.max_value.param_name }}'
                   min='0'
@@ -77,15 +86,13 @@
                   {% if filter.max_value.value %}
                     value='{{ filter.max_value.value | divided_by: 100.0 }}'
                   {% endif %}
-                  placeholder='{{ filter.range_max | divided_by: 100.0 }}'
-              ></label>
+                  placeholder='{{ filter.range_max | divided_by: 100.0 }}'>
           {%- endcase %}
         </div>
       </details>
     {% endfor %}
-    <label>
-      {{- 'general.sort' | t -}}
-      <select name='sort_by'>
+    <label for='SortBy-{{ results.id | default: request.page_type }}'>{{ 'general.sort' | t }}</label>
+      <select id='SortBy-{{ results.id | default: request.page_type }}' name='sort_by'>
         {% assign current_sort = results.sort_by | default: results.default_sort_by -%}
         {%- for option in results.sort_options %}
           <option
@@ -97,8 +104,8 @@
             {{ option.name | escape }}
           </option>
         {% endfor %}
-      </select></label
-    ><button type='submit'>{{ 'general.apply' | t }}</button>
+      </select>
+    <button type='submit'>{{ 'general.apply' | t }}</button>
   </div>
   <div class='active-filters'>
     {% for filter in results.filters -%}

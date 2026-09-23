@@ -39,28 +39,24 @@
         "0": {
           "type": "collection",
           "settings": {
-            "collection": "casual",
             "heading": "Casual"
           }
         },
         "1": {
           "type": "collection",
           "settings": {
-            "collection": "lifestyle",
             "heading": "Lifestyle"
           }
         },
         "2": {
           "type": "collection",
           "settings": {
-            "collection": "performance",
             "heading": "Performance"
           }
         },
         "3": {
           "type": "collection",
           "settings": {
-            "collection": "formal",
             "heading": "Formal"
           }
         }
@@ -103,8 +99,7 @@
         "panel_eyebrow": "X1 / Design system",
         "panel_heading": "Built around the way you move.",
         "panel_text": "<p>Three considered layers work together to create a lighter, more grounded everyday silhouette.</p>",
-        "button_label": "Explore the X1",
-        "button_link": "/products/vanta-x1",
+        "button_label": "Explore all shoes",
         "demo_model": false,
         "rotation": -20,
         "camera": 3.5,

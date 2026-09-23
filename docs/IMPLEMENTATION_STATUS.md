@@ -28,7 +28,7 @@ VANTA is implemented and uploaded as a separate Shopify development theme. **Not
 
 Store: test1-st8x0er8.myshopify.com. Development theme: 192804028695. Existing live theme was not edited or published. Store catalog records were not changed. No customer communication or order was submitted.
 
-Generated original fictional image assets: assets/vanta-campaign*.jpg and assets/vanta-editorial*.jpg; prompts/tool provenance in ASSET_PROVENANCE.md. AURA/FORGE token directions are retained in docs/future-presets.json, while the installable configuration advertises VANTA only.
+Generated original fictional image assets: `assets/vanta-campaign*.webp` and `assets/vanta-editorial*.webp`; prompts/tool provenance in `ASSET_PROVENANCE.md`. AURA/FORGE token directions are retained in `docs/future-presets.json`, while the installable configuration advertises VANTA only.
 
 Known product limitations are explicit in 3D_SYSTEM.md and THEME_STORE_SUBMISSION.md. Open gates are not hidden by Theme Check ignores, fake Lighthouse scores or fabricated review/stock data.
 
