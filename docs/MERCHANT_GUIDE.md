@@ -40,7 +40,7 @@ Configure filter availability in Shopify. The theme renders the filters the plat
 
 ## 3D setup
 
-Upload a self-contained GLB to Shopify Files and paste its URL into the 3D section. Add a poster image first: it is visible immediately and remains the complete fallback. Start with balanced quality, mobile poster mode, no automatic rotation and subtle scroll rotation. Camera distance, rotation, scale, model position and lighting tune the composition.
+The default home page includes an original stylized VANTA sneaker model. Toggle “Use bundled VANTA concept model” in a 3D section to use it. For your own product, upload a self-contained GLB to Shopify Files and paste its URL into the 3D section; that URL overrides the bundled demo. Add a poster image first: it is visible immediately and remains the complete fallback. Start with balanced quality, mobile poster mode, no automatic rotation and subtle scroll rotation. Camera distance, rotation, scale, model position and lighting tune the composition.
 
 Use GLB with embedded textures under 5 MB, ideally under 2 MB for mobile. Keep textures around 1024–2048px and minimize mesh/material count. The current custom engine does not support Draco/Meshopt/KTX2-compressed files. Your model artist should export an ordinary GLB and check it in the preview. A 20 MB transfer limit protects shoppers from accidental large uploads.
 

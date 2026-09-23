@@ -1,4 +1,5 @@
 <section
+  id='VantaProducts-{{ section.id }}'
   class='marketing-section'
   style='--section-bg:{{ section.settings.background }};--section-fg:{{ section.settings.foreground }};--space:{{ section.settings.spacing }}px;--text-align:{{ section.settings.alignment }}'
 >
@@ -10,6 +11,7 @@
       </div>
       <div class='rte'>{{ section.settings.text }}</div>
     </div>
+    {% if request.page_type == 'index' %}<span id='VantaProducts'></span>{% endif %}
     <div class='product-grid' style='--columns:{{ section.settings.columns }}'>
       {% for product in section.settings.collection.products limit: section.settings.limit -%}
         {%- render 'product-card', product: product -%}
@@ -17,7 +19,12 @@
         {%- for i in (1..4) %}
           <article class='product-card'>
             {% if settings.demo_images -%}
-              {%- render 'demo-image', sizes: '(min-width: 990px) 25vw, 50vw' %}
+              {% assign demo_kinds = 'campaign,aero,flux,terra' | split: ',' -%}
+              {%- assign demo_index = forloop.index0 -%}
+              {%- render 'demo-image',
+                kind: demo_kinds[demo_index],
+                sizes: '(min-width: 990px) 25vw, 50vw'
+              %}
               <p class='eyebrow'>{{ 'general.demo_label' | t }}</p>
               <h3>VANTA {% cycle 'X1', 'Aero', 'Flux', 'Terra' %}</h3>
             {% else -%}

@@ -28,18 +28,20 @@ export async function createScene(host, signal) {
     ),
   );
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 0.9;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
   const ambient = new THREE.HemisphereLight(
     0xffffff,
     0x4a5148,
-    host.dataset.lighting === 'edge' ? 1 : 2.5,
+    host.dataset.lighting === 'edge' ? 0.7 : 1.6,
   );
   scene.add(ambient);
-  const key = new THREE.DirectionalLight(0xffffff, 4);
+  const key = new THREE.DirectionalLight(0xffffff, 2.5);
   key.position.set(3, 4, 5);
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0xd5fa95, 3);
+  const rim = new THREE.DirectionalLight(0xd5fa95, 1.5);
   rim.position.set(-3, 1, -2);
   scene.add(rim);
   let model,

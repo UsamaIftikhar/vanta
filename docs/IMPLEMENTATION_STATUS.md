@@ -13,7 +13,7 @@ VANTA is implemented and uploaded as a separate Shopify development theme. **Not
 | Marketing library and VANTA styles | DONE | 44 total sections including core templates; theme.css; original generated imagery | Repeated demo images must be replaced by consistent catalog/campaign assets |
 | Optional motion | DONE | motion.js, CSS, pause controls, reduced-motion tests | Stagger currently individual reveal timing; no vertical scroll hijacking |
 | Optional 3D engine | DONE | three-loader/scene/runtime; synthetic GLB failure/lifecycle tests | Ordinary embedded GLB only; no Draco/Meshopt/KTX2 decoding |
-| Production sneaker 3D and art direction | BLOCKED | ASSET_REQUIREMENTS.md | Need prepared original model, real visual/GPU review; fixture is not a sneaker model |
+| Demo sneaker 3D and art direction | DONE | assets/vanta-concept.glb; demo-experience.spec.mjs | Stylized original model now visible; production photo-matched model/GPU review remains |
 | Accessibility automation | DONE | Axe home/collection/product/cart; keyboard/focus; Lighthouse 100 | Manual screen reader/physical device audit remains |
 | Responsive overflow matrix | DONE | 15 requested widths across home/product/collection/cart/search | Physical orientation/safe-area/device checks remain |
 | Screenshots | DONE | docs/qa/screenshots; screenshot script | Captures are review artifacts, not approved regression baselines; captures refreshed; review remains ongoing |
@@ -37,3 +37,11 @@ Known product limitations are explicit in 3D_SYSTEM.md and THEME_STORE_SUBMISSIO
 Full Chromium run: 55 passed, 4 intentionally skipped duplicate matrix runs, 1 artifact-directory collision. The affected full variant matrix passed on isolated rerun. Static tests: 5 passed. Cross-browser initial run: 16 passed, 2 failed. Firefox navigation passed after correcting viewport detection in the test. WebKit focus restoration required an implementation fix; all interaction assertions then passed, while the test still reports a Shopify-injected CORS pageerror on HTTP localhost. This environment failure remains unresolved, not suppressed.
 
 Final focused Chromium rerun after dialog/race fixes: 2 passed (navigation/focus and full cart mutation flow). Theme Check remains zero offenses. ZIP packaging succeeded.
+
+## Follow-up: visible product photos and 3D
+
+- Added distinct original Flux, Aero and Terra product photographs, with responsive small variants; existing X1 photo completes four distinct demo cards.
+- Added bundled original stylized sneaker GLB (~948 KiB), reproducible model-generation script, and per-section demo-model switch. Merchant GLB URLs take precedence.
+- Enabled hero auto-rotation and drag on desktop/mobile; inserted a three-frame camera story and configured model hotspots. Reduced-motion/data-saver fallbacks remain.
+- New default-experience browser tests check actual loaded model animation, pause, photo loading and reduced-motion activation. These supplement synthetic model-failure tests.
+- Store catalog records still contain the original Shopify test products; this change populates the theme's demo photography, not those unrelated products.

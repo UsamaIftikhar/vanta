@@ -12,7 +12,8 @@
     "package": "npm run build && npm run check && shopify theme package",
     "lighthouse": "node scripts/lighthouse.mjs",
     "test:cross-browser": "playwright test --config playwright.cross-browser.config.mjs tests/browser/storefront.spec.mjs tests/browser/forms-filters.spec.mjs",
-    "format": "prettier --write \"assets/*.{js,css}\" \"{layout,sections,snippets,templates}/*.liquid\""
+    "format": "prettier --write \"assets/*.{js,css}\" \"{layout,sections,snippets,templates}/*.liquid\"",
+    "build:demo-model": "node scripts/create-demo-model.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",

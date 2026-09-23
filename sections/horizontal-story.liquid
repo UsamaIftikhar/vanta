@@ -19,7 +19,9 @@
       {% for block in section.blocks %}
         <article {{ block.shopify_attributes }}>
           <span class='eyebrow'>0{{ forloop.index }}</span>
-          {%- render 'image', image: block.settings.image, demo: 'campaign' %}
+          {% assign demo_kinds = 'campaign,flux,aero' | split: ',' -%}
+          {%- assign demo_index = forloop.index0 | modulo: 3 -%}
+          {%- render 'image', image: block.settings.image, demo: demo_kinds[demo_index] %}
           <h3>{{ block.settings.heading | escape }}</h3>
           <div class='rte'>{{ block.settings.text }}</div>
           {% if block.settings.link -%}

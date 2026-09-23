@@ -1,5 +1,11 @@
+{% liquid
+  assign scene_model = section.settings.model
+  if scene_model == blank and section.settings.demo_model
+    assign scene_model = 'vanta-concept.glb' | asset_url
+  endif
+%}
 <product-scene
-  data-model='{{ section.settings.model | escape }}'
+  data-model='{{ scene_model | escape }}'
   data-scale='{{ section.settings.scale }}'
   data-rotation='{{ section.settings.rotation }}'
   data-camera='{{ section.settings.camera }}'
@@ -20,7 +26,7 @@
     {% render 'image', image: section.settings.poster, eager: eager, demo: 'campaign' %}
   </div>
   <div class='scene-canvas' aria-hidden='true'></div>
-  {% if section.settings.model != blank -%}
+  {% if scene_model != blank -%}
     <button class='scene-enable' type='button' data-scene-enable>
       {{ 'general.enable_3d' | t }} +
     </button>

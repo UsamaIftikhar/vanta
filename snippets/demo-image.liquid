@@ -18,6 +18,19 @@
     fetchpriority='{{ priority }}'
     class='{{ class }}'
   >
+{% elsif kind == 'flux' or kind == 'aero' or kind == 'terra' %}
+  {% assign full_image = 'vanta-' | append: kind | append: '.jpg' %}
+  {% assign small_image = 'vanta-' | append: kind | append: '-small.jpg' %}
+  <img
+    src='{{ full_image | asset_url }}'
+    srcset='{{ small_image | asset_url }} 600w, {{ full_image | asset_url }} 1200w'
+    sizes='{{ sizes | default: "(min-width: 990px) 25vw, 50vw" }}'
+    width='1200'
+    height='1200'
+    alt='VANTA {{ kind | capitalize }} — {{ "general.demo_label" | t }}'
+    loading='{{ image_loading }}'
+    class='{{ class }}'
+  >
 {% else %}
   <img
     src='{{ 'vanta-campaign.jpg' | asset_url }}'

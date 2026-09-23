@@ -17,7 +17,9 @@
             {%- assign collection_image = block.settings.image
               | default: block.settings.collection.featured_image
             -%}
-            {%- render 'image', image: collection_image, demo: 'editorial' %}
+            {% assign demo_kind = 'editorial' -%}
+            {%- if forloop.index == 2 %}{% assign demo_kind = 'terra' %}{% endif -%}
+            {%- render 'image', image: collection_image, demo: demo_kind %}
             <div class='collection-card-title'>
               <h3>
                 {{ block.settings.heading | default: block.settings.collection.title | escape }}

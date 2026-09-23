@@ -3,8 +3,17 @@
     "hero": {
       "type": "immersive-hero",
       "settings": {
-        "button_link": "shopify://collections/all",
-        "button_label": "Explore VANTA"
+        "button_link": "#VantaProducts",
+        "button_label": "Explore the silhouettes",
+        "demo_model": true,
+        "auto_rotate": true,
+        "rotation_speed": 10,
+        "rotation": -25,
+        "camera": 3.5,
+        "camera_angle": 20,
+        "mobile": "interactive",
+        "scroll": true,
+        "pointer": true
       }
     },
     "statement": {
@@ -81,7 +90,11 @@
       "type": "product-hotspots",
       "settings": {
         "heading": "Form. Function. Feeling.",
-        "text": "<p>A closer look at our fictional X1 concept.</p>"
+        "text": "<p>A closer look at our fictional X1 concept.</p>",
+        "demo_model": true,
+        "rotation": -20,
+        "camera": 3.5,
+        "camera_angle": 15
       },
       "blocks": {
         "0": {
@@ -191,6 +204,59 @@
         "heading": "Stay in motion.",
         "text": "<p>New ideas. New releases. A fresh perspective.</p>"
       }
+    },
+    "story": {
+      "type": "immersive-story",
+      "settings": {
+        "eyebrow": "02 / Inside the silhouette",
+        "heading": "Designed in every dimension.",
+        "text": "<p>Drag to explore. Scroll to see another side of the original VANTA concept.</p>",
+        "demo_model": true,
+        "rotation": -20,
+        "camera": 3.5,
+        "camera_angle": 15,
+        "mobile": "interactive"
+      },
+      "blocks": {
+        "upper": {
+          "type": "frame",
+          "settings": {
+            "heading": "Room to move.",
+            "metric": "01",
+            "text": "<p>Explore the contours of the knit-inspired upper.</p>",
+            "rotation": -35,
+            "camera": 3,
+            "scale": 110
+          }
+        },
+        "sole": {
+          "type": "frame",
+          "settings": {
+            "heading": "A different foundation.",
+            "metric": "02",
+            "text": "<p>Sculpted layers give the silhouette its distinctive profile.</p>",
+            "rotation": 45,
+            "camera": 3.5,
+            "scale": 100
+          }
+        },
+        "heel": {
+          "type": "frame",
+          "settings": {
+            "heading": "Every angle considered.",
+            "metric": "03",
+            "text": "<p>Turn toward the heel to explore the cage and pull-tab details.</p>",
+            "rotation": 135,
+            "camera": 3,
+            "scale": 110
+          }
+        }
+      },
+      "block_order": [
+        "upper",
+        "sole",
+        "heel"
+      ]
     }
   },
   "order": [
@@ -198,6 +264,7 @@
     "statement",
     "featured",
     "collections",
+    "story",
     "journey",
     "hotspots",
     "video",
